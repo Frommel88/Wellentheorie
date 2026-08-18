@@ -5,5 +5,25 @@
   "display": "standalone",
   "background_color": "#fff8eb",
   "theme_color": "#fff8eb",
-  "description": "Elliott-Wellen und Fibonacci kinderleicht lernen"
+  "description": "Elliott-Wellen und Fibonacci kinderleicht lernen",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
