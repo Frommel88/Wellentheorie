@@ -1,0 +1,9 @@
+{
+  "name": "WellenWelt",
+  "short_name": "WellenWelt",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff8eb",
+  "theme_color": "#fff8eb",
+  "description": "Elliott-Wellen und Fibonacci kinderleicht lernen"
+}

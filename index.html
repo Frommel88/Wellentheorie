@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff8eb">
+<link rel="manifest" href="manifest.webmanifest">
+<title>WellenWelt App</title>
+<style>
+:root{--bg:#fff8eb;--ink:#25324a;--muted:#67738b;--card:#fff;--line:#eadfce;--blue:#5b9fe8;--green:#86d4a5;--yellow:#ffd76f;--pink:#ffacc0}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(#fffdf7,#fff5e6);color:var(--ink)}
+button,input{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:92px}.top{position:sticky;top:0;z-index:5;background:rgba(255,248,235,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:900}.logo b{color:var(--blue)} .chip{font-size:.8rem;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#fff}
+main{padding:20px 16px}.hero,.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 10px 25px rgba(86,60,10,.07)}
+.hero{background:linear-gradient(135deg,#eef7ff,#fff7de)} h1{font-size:2.1rem;line-height:1.05;margin:8px 0 10px}h2{margin:.2em 0}.muted,p{color:var(--muted);line-height:1.6}
+.progress{height:12px;border-radius:999px;background:#f1eadf;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));transition:.3s}
+.btn{border:0;border-radius:14px;padding:12px 15px;font-weight:850;cursor:pointer;background:var(--blue);color:white}.btn.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}.actions{display:flex;gap:10px;flex-wrap:wrap}
+.lesson-list{display:grid;gap:12px;margin-top:16px}.lesson-card{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:14px;border-radius:18px;background:white;border:1px solid var(--line)}
+.icon{width:52px;height:52px;border-radius:16px;background:#eef7ff;display:grid;place-items:center;font-size:1.8rem}.lesson-card h3{margin:0;font-size:1rem}.lesson-card p{margin:2px 0 0;font-size:.88rem}.status{font-size:.8rem;font-weight:800}
+.screen{display:none}.screen.active{display:block}.lesson-head{display:flex;gap:12px;align-items:center;margin-bottom:14px}.back{border:0;background:white;border:1px solid var(--line);border-radius:12px;padding:9px 11px}
+.step{display:none}.step.active{display:block}.big-emoji{text-align:center;font-size:5rem;margin:18px 0}.example{background:#fff8d7;border:1px solid #eedf97;border-radius:16px;padding:14px;margin:14px 0;color:#5b5238}
+.term{background:#eef7ff;border:1px solid #d5eaff;border-radius:16px;padding:14px;margin:14px 0}.qopt{display:block;margin:8px 0;padding:11px;border-radius:12px;background:#faf7f0;border:1px solid var(--line)}.feedback{display:none;margin-top:12px;padding:12px;border-radius:12px}.feedback.show{display:block}.ok{background:#effaf3;border:1px solid #bde7ca;color:#306b45}.bad{background:#fff0f0;border:1px solid #f1c3c3;color:#8b4141}
+.timer{font-weight:900;color:var(--blue)}.bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:center}.bottom-inner{width:min(760px,100%);display:grid;grid-template-columns:repeat(3,1fr)}.tab{border:0;background:transparent;padding:12px 6px;font-size:.82rem;color:var(--muted)}.tab b{display:block;font-size:1.25rem}.tab.active{color:var(--blue)}
+.routine{display:grid;gap:10px}.routine .card{text-align:center}.tiny{font-size:.82rem}.install-note{font-size:.86rem}
+@media(min-width:700px){.routine{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="logo">🌊 Wellen<b>Welt</b></div><div class="chip" id="streak">0 Tage gelernt</div></header>
+
+  <main>
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div class="chip">Heute: ca. 10 Minuten</div>
+        <h1>Eine kleine Lektion. Jeden Tag.</h1>
+        <p>Erst schauen. Dann verstehen. Dann selbst erklären. Fachbegriffe kommen immer erst ganz am Ende.</p>
+        <div class="progress"><div class="bar" id="overallBar"></div></div>
+        <p class="tiny" id="progressText">0 von 7 Lektionen geschafft</p>
+        <div class="actions"><button class="btn" id="continueBtn">Heute lernen</button><button class="btn alt" id="reviewBtn">Gestern wiederholen</button></div>
+      </div>
+
+      <div class="lesson-list" id="lessonList"></div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>⏰ Deine Abendroutine</h2>
+        <p>20:00 Uhr: 5 Minuten Wiederholen + 5 Minuten neue Lektion. Danach eine Mini-Frage.</p>
+      </div>
+    </section>
+
+    <section id="learn" class="screen">
+      <div class="lesson-head"><button class="back" id="backBtn">←</button><div><b id="lessonTitle"></b><div class="tiny timer" id="timer">ca. 10 Min.</div></div></div>
+      <div class="card">
+        <div class="progress"><div class="bar" id="lessonBar"></div></div>
+        <div id="steps"></div>
+        <div class="actions" style="margin-top:18px"><button class="btn alt" id="prevStep">Zurück</button><button class="btn" id="nextStep">Weiter</button></div>
+      </div>
+    </section>
+
+    <section id="routine" class="screen">
+      <div class="hero"><h1>Deine 10-Minuten-Routine</h1><p>Du musst nicht lange lernen. Wichtig ist, dass du oft wiederkommst.</p></div>
+      <div class="routine" style="margin-top:14px">
+        <div class="card"><div class="big-emoji">🔁</div><h2>3 Min.</h2><p>Gestern in eigenen Worten erklären.</p></div>
+        <div class="card"><div class="big-emoji">📘</div><h2>5 Min.</h2><p>Eine neue Idee lernen.</p></div>
+        <div class="card"><div class="big-emoji">🧠</div><h2>2 Min.</h2><p>Eine Frage ohne Nachsehen beantworten.</p></div>
+      </div>
+      <div class="card" style="margin-top:14px"><b>Goldene Regel:</b><p>Kannst du es einem Kind erklären, hast du es wahrscheinlich verstanden. Wenn nicht, gehe einen Schritt zurück.</p></div>
+    </section>
+
+    <section id="about" class="screen">
+      <div class="card"><h2>Wichtiger Hinweis</h2><p>Die App dient nur zum Lernen. Elliott-Wellen und Fibonacci-Marken sind keine sicheren Vorhersagen und keine Anlageberatung. Wellenzählungen können unterschiedlich interpretiert werden.</p>
+      <p class="install-note"><b>Als App installieren:</b> In Chrome/Edge über „App installieren“ bzw. im Browser-Menü „Zum Startbildschirm hinzufügen“. Auf iPhone/iPad in Safari: Teilen → „Zum Home-Bildschirm“.</p></div>
+    </section>
+  </main>
+</div>
+
+<nav class="bottom"><div class="bottom-inner">
+<button class="tab active" data-screen="home"><b>🏠</b>Heute</button>
+<button class="tab" data-screen="routine"><b>🔁</b>Routine</button>
+<button class="tab" data-screen="about"><b>ℹ️</b>Info</button>
+</div></nav>
+
+<script>
+const lessons=[
+{title:"1. Was ist ein Kurs?",icon:"🧸",steps:[
+["story","Stell dir einen Teddy vor","🧸","Ein Teddy kostet heute 10 €. Morgen kostet er 12 €. Sein Preis hat sich verändert."],
+["example","Was bedeutet das?","⬆️","Der Preis von etwas kann steigen oder fallen. Bei Aktien nennt man diesen Preis oft Kurs."],
+["term","Der neue Begriff","🏷️","Kurs = der aktuelle Preis einer Aktie oder eines anderen gehandelten Gegenstands."],
+["quiz","Mini-Frage","❓","Was ist ein Kurs?","Der aktuelle Preis","Eine geheime Börsenregel","0"]
+]},
+{title:"2. Was ist ein Chart?",icon:"📈",steps:[
+["story","Ein Bild erzählt eine Geschichte","🖍️","Wenn wir jeden Tag den Teddy-Preis aufmalen, sehen wir: hoch, runter, hoch."],
+["example","Wie eine Wachstumslinie","📏","So wie man an der Wand markiert, wie groß ein Kind wird, zeigt ein Chart, wie sich ein Preis verändert."],
+["term","Der neue Begriff","📊","Chart = eine Zeichnung, die zeigt, wie sich ein Preis mit der Zeit bewegt."],
+["quiz","Mini-Frage","❓","Was zeigt ein Chart?","Wie sich ein Preis verändert","Wie laut die Börse ist","0"]
+]},
+{title:"3. Was ist eine Welle?",icon:"🌊",steps:[
+["story","Wie eine Schaukel","🎠","Eine Schaukel geht hoch, dann runter, dann wieder hoch. Preise bewegen sich oft ähnlich."],
+["example","Nicht geradeaus","⛰️","Beim Bergsteigen gehst du hoch, machst Pause oder gehst kurz zurück und gehst weiter."],
+["term","Der neue Begriff","🌊","Welle = ein Abschnitt einer Preisbewegung nach oben oder unten."],
+["quiz","Mini-Frage","❓","Warum heißt es Welle?","Weil Preise oft hoch und runter laufen","Weil Aktien im Meer schwimmen","0"]
+]},
+{title:"4. Elliott: 1–2–3–4–5",icon:"🖐️",steps:[
+["story","Fünf kleine Schritte","👣","Elliott beschreibt eine typische Bewegung oft als fünf Teile: vor, etwas zurück, weiter vor, Pause, noch einmal vor."],
+["example","Wie Bergsteigen","🧗","1 hoch, 2 etwas zurück, 3 weiter hoch, 4 Pause, 5 letzter Schub."],
+["term","Der neue Begriff","🔢","Impuls = eine typische fünfteilige Bewegung in Richtung des größeren Trends."],
+["quiz","Mini-Frage","❓","Wie viele Teile hat ein typischer Elliott-Impuls?","5","3","0"]
+]},
+{title:"5. Was ist eine Korrektur?",icon:"↩️",steps:[
+["story","Nach vorne kommt oft zurück","🚶","Nach mehreren Schritten nach vorne gehst du manchmal ein Stück zurück."],
+["example","A–B–C","🔤","Elliott beschreibt Gegenbewegungen häufig mit A, B und C."],
+["term","Der neue Begriff","↩️","Korrektur = eine Bewegung gegen die vorherige größere Bewegung."],
+["quiz","Mini-Frage","❓","Was ist eine Korrektur?","Eine Gegenbewegung","Eine Garantie für fallende Kurse","0"]
+]},
+{title:"6. Retracement kinderleicht",icon:"🍦",steps:[
+["story","Der Weg zur Eisdiele","🍦","Du gehst 100 Meter vorwärts. Dann gehst du 30 Meter zurück. Du bist nicht wieder am Start, sondern nur ein Stück zurück."],
+["example","Genau das meint das Wort","↩️","Ein Teil des vorherigen Weges wird zurückgenommen."],
+["term","Der neue Begriff","📐","Retracement = ein teilweises Zurücklaufen der vorherigen Preisbewegung."],
+["quiz","Mini-Frage","❓","Was bedeutet Retracement?","Ein Stück des vorherigen Weges zurück","Immer ganz zurück zum Start","0"]
+]},
+{title:"7. Fibonacci ohne Zauberei",icon:"🐇",steps:[
+["story","Eine besondere Zahlenfolge","🔢","1, 1, 2, 3, 5, 8, 13 ... Jede neue Zahl entsteht aus den zwei Zahlen davor."],
+["example","Daraus entstehen Verhältnisse","🧩","Trader beobachten oft Marken wie 38,2 % oder 61,8 %. Sie rechnen damit mögliche Rücklaufzonen aus."],
+["term","Ganz wichtig","⚠️","Fibonacci-Marken sind Rechenhilfen. Sie sagen nicht sicher voraus, wo ein Kurs drehen wird."],
+["quiz","Mini-Frage","❓","Sind Fibonacci-Marken sichere Vorhersagen?","Nein","Ja, immer","0"]
+]}];
+
+let state=JSON.parse(localStorage.getItem("ww-state")||'{"done":[],"last":null}');
+let current=0,step=0;
+
+function save(){localStorage.setItem("ww-state",JSON.stringify(state));renderHome()}
+function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.screen===id))}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>show(t.dataset.screen));
+
+function renderHome(){
+ const list=document.getElementById("lessonList"); list.innerHTML="";
+ lessons.forEach((l,i)=>{
+  const done=state.done.includes(i);
+  const div=document.createElement("div");div.className="lesson-card";
+  div.innerHTML=`<div class="icon">${l.icon}</div><div><h3>${l.title}</h3><p>ca. 10 Minuten · Bild → Beispiel → Begriff → Frage</p></div><div class="status">${done?"✅ Fertig":"Start"}</div>`;
+  div.onclick=()=>openLesson(i); list.appendChild(div);
+ });
+ const n=state.done.length; document.getElementById("overallBar").style.width=(n/lessons.length*100)+"%";
+ document.getElementById("progressText").textContent=`${n} von ${lessons.length} Lektionen geschafft`;
+ document.getElementById("streak").textContent=n+" Lektionen gelernt";
+}
+function openLesson(i){current=i;step=0;document.getElementById("lessonTitle").textContent=lessons[i].title;renderSteps();show("learn")}
+function renderSteps(){
+ const s=lessons[current].steps; const box=document.getElementById("steps"); box.innerHTML="";
+ s.forEach((x,i)=>{
+  const d=document.createElement("div");d.className="step"+(i===step?" active":"");
+  if(x[0]==="quiz"){
+   d.innerHTML=`<div class="big-emoji">${x[2]}</div><h2>${x[1]}</h2><p><b>${x[3]}</b></p>
+   <label class="qopt"><input type="radio" name="quiz" value="0"> ${x[4]}</label>
+   <label class="qopt"><input type="radio" name="quiz" value="1"> ${x[5]}</label>
+   <div class="feedback" id="fb"></div>`;
+  } else {
+   d.innerHTML=`<div class="big-emoji">${x[2]}</div><h2>${x[1]}</h2><div class="${x[0]==="term"?"term":"example"}">${x[3]}</div>`;
+  }
+  box.appendChild(d);
+ });
+ document.getElementById("lessonBar").style.width=((step+1)/s.length*100)+"%";
+ document.getElementById("prevStep").style.visibility=step===0?"hidden":"visible";
+ document.getElementById("nextStep").textContent=step===s.length-1?"Fertig":"Weiter";
+}
+document.getElementById("nextStep").onclick=()=>{
+ const s=lessons[current].steps;
+ if(step===s.length-1){
+   const q=document.querySelector('input[name="quiz"]:checked'); const fb=document.getElementById("fb");
+   if(!q){fb.className="feedback show bad";fb.textContent="Wähle zuerst eine Antwort.";return}
+   if(q.value!==s[step][6]){fb.className="feedback show bad";fb.textContent="Fast. Schau dir die Lektion noch einmal kurz an.";return}
+   fb.className="feedback show ok";fb.textContent="Richtig! Lektion geschafft.";
+   if(!state.done.includes(current))state.done.push(current);state.last=current;save();
+   setTimeout(()=>show("home"),700); return;
+ }
+ step++;renderSteps();
+}
+document.getElementById("prevStep").onclick=()=>{if(step>0){step--;renderSteps()}};
+document.getElementById("backBtn").onclick=()=>show("home");
+document.getElementById("continueBtn").onclick=()=>{
+ let next=lessons.findIndex((_,i)=>!state.done.includes(i)); if(next<0)next=0;openLesson(next)
+};
+document.getElementById("reviewBtn").onclick=()=>openLesson(state.last ?? 0);
+
+renderHome();
+
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js"))}
+</script>
+</body>
+</html>
