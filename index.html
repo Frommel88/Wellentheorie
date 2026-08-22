@@ -1,192 +1,633 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#fff8eb">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<title>WellenWelt App</title>
-<style>
-:root{--bg:#fff8eb;--ink:#25324a;--muted:#67738b;--card:#fff;--line:#eadfce;--blue:#5b9fe8;--green:#86d4a5;--yellow:#ffd76f;--pink:#ffacc0}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(#fffdf7,#fff5e6);color:var(--ink)}
-button,input{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:92px}.top{position:sticky;top:0;z-index:5;background:rgba(255,248,235,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:900}.logo b{color:var(--blue)} .chip{font-size:.8rem;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#fff}
-main{padding:20px 16px}.hero,.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 10px 25px rgba(86,60,10,.07)}
-.hero{background:linear-gradient(135deg,#eef7ff,#fff7de)} h1{font-size:2.1rem;line-height:1.05;margin:8px 0 10px}h2{margin:.2em 0}.muted,p{color:var(--muted);line-height:1.6}
-.progress{height:12px;border-radius:999px;background:#f1eadf;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));transition:.3s}
-.btn{border:0;border-radius:14px;padding:12px 15px;font-weight:850;cursor:pointer;background:var(--blue);color:white}.btn.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}.actions{display:flex;gap:10px;flex-wrap:wrap}
-.lesson-list{display:grid;gap:12px;margin-top:16px}.lesson-card{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:14px;border-radius:18px;background:white;border:1px solid var(--line)}
-.icon{width:52px;height:52px;border-radius:16px;background:#eef7ff;display:grid;place-items:center;font-size:1.8rem}.lesson-card h3{margin:0;font-size:1rem}.lesson-card p{margin:2px 0 0;font-size:.88rem}.status{font-size:.8rem;font-weight:800}
-.screen{display:none}.screen.active{display:block}.lesson-head{display:flex;gap:12px;align-items:center;margin-bottom:14px}.back{border:0;background:white;border:1px solid var(--line);border-radius:12px;padding:9px 11px}
-.step{display:none}.step.active{display:block}.big-emoji{text-align:center;font-size:5rem;margin:18px 0}.example{background:#fff8d7;border:1px solid #eedf97;border-radius:16px;padding:14px;margin:14px 0;color:#5b5238}
-.term{background:#eef7ff;border:1px solid #d5eaff;border-radius:16px;padding:14px;margin:14px 0}.qopt{display:block;margin:8px 0;padding:11px;border-radius:12px;background:#faf7f0;border:1px solid var(--line)}.feedback{display:none;margin-top:12px;padding:12px;border-radius:12px}.feedback.show{display:block}.ok{background:#effaf3;border:1px solid #bde7ca;color:#306b45}.bad{background:#fff0f0;border:1px solid #f1c3c3;color:#8b4141}
-.timer{font-weight:900;color:var(--blue)}.bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:center}.bottom-inner{width:min(760px,100%);display:grid;grid-template-columns:repeat(3,1fr)}.tab{border:0;background:transparent;padding:12px 6px;font-size:.82rem;color:var(--muted)}.tab b{display:block;font-size:1.25rem}.tab.active{color:var(--blue)}
-.routine{display:grid;gap:10px}.routine .card{text-align:center}.tiny{font-size:.82rem}.install-note{font-size:.86rem}
-@media(min-width:700px){.routine{grid-template-columns:repeat(3,1fr)}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111318">
+  <meta name="description" content="Elliott Wave Academy – 240 Lektionen zu Elliott-Wellen, Fibonacci, Charttechnik und Fundamentalanalyse.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Elliott Wave Academy</title>
+  <style>
+    html,body{margin:0;padding:0;min-height:100%;background:#0f1115}
+    body{min-width:0}
+  </style>
 </head>
 <body>
-<div class="app">
-  <header class="top"><div class="logo">🌊 Wellen<b>Welt</b></div><div class="chip" id="streak">0 Tage gelernt</div></header>
+<div id="ewa" style="min-height:100%;background:light-dark(#f7f8fb,#0f1115);color:light-dark(#16181d,#f4f5f7);font-family:Inter,system-ui,sans-serif;padding:20px;box-sizing:border-box">
+  <style>
+    #ewa *{box-sizing:border-box}
+    #ewa .wrap{max-width:1100px;margin:0 auto}
+    #ewa .hero{display:grid;grid-template-columns:1.4fr .8fr;gap:18px;align-items:stretch}
+    #ewa .card{background:light-dark(#fff,#171a20);border:1px solid light-dark(#e3e6eb,#2a2f38);border-radius:20px;padding:18px}
+    #ewa h1,#ewa h2,#ewa h3,#ewa p{margin-top:0}
+    #ewa h1{font-size:clamp(28px,5vw,48px);line-height:1.02;margin-bottom:10px}
+    #ewa h2{font-size:23px;margin-bottom:12px}
+    #ewa h3{font-size:17px;margin-bottom:8px}
+    #ewa .muted{color:light-dark(#68707d,#aab2be)}
+    #ewa .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+    #ewa button{font:inherit}
+    #ewa .tab,#ewa .btn{min-height:44px;border:0;border-radius:12px;padding:10px 14px;cursor:pointer;background:light-dark(#e9edf3,#242933);color:inherit}
+    #ewa .tab.active,#ewa .btn.primary{background:light-dark(#16181d,#f4f5f7);color:light-dark(#fff,#111318)}
+    #ewa .btn.secondary{border:1px solid light-dark(#d7dce4,#353b46);background:transparent}
+    #ewa .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    #ewa .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    #ewa .progress{height:10px;border-radius:99px;background:light-dark(#e9edf2,#252a32);overflow:hidden}
+    #ewa .progress>span{display:block;height:100%;background:linear-gradient(90deg,#5d6df8,#8b5cf6);width:22%}
+    #ewa .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:13px;background:light-dark(#eef1f6,#232832)}
+    #ewa .lesson{display:flex;gap:12px;align-items:flex-start}
+    #ewa .num{flex:0 0 38px;height:38px;border-radius:12px;display:grid;place-items:center;font-weight:700;background:light-dark(#eef1f6,#232832)}
+    #ewa .wave{width:100%;height:auto;display:block;margin:6px 0 8px}
+    #ewa .hidden{display:none!important}
+    #ewa .term{padding:12px 0;border-bottom:1px solid light-dark(#eceef2,#292e36)}
+    #ewa .term:last-child{border-bottom:0}
+    #ewa .choice{display:block;width:100%;text-align:left;margin:8px 0;border:1px solid light-dark(#dfe3e9,#343a45);background:transparent;color:inherit;border-radius:12px;padding:12px;cursor:pointer}
+    #ewa .choice.good{border-color:#4aa36b;background:rgba(74,163,107,.12)}
+    #ewa .choice.bad{border-color:#d15b5b;background:rgba(209,91,91,.12)}
+    #ewa input,#ewa select{width:100%;min-height:44px;padding:10px 12px;border-radius:12px;border:1px solid light-dark(#d9dde4,#343a45);background:light-dark(#fff,#11141a);color:inherit;font-size:16px}
+    #ewa label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+    #ewa .calcrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    #ewa .result{font-size:26px;font-weight:800;margin-top:8px}
+    #ewa .steps{counter-reset:s}
+    #ewa .step{position:relative;padding-left:42px;margin:16px 0;min-height:32px}
+    #ewa .step:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:light-dark(#17191f,#f2f3f5);color:light-dark(#fff,#111318);font-weight:700}
+    #ewa .banner{border-radius:16px;padding:14px;background:linear-gradient(135deg,rgba(93,109,248,.14),rgba(139,92,246,.14));border:1px solid light-dark(#dfe2f7,#35395a)}
+    #ewa .score{font-size:44px;font-weight:900;line-height:1}
+    #ewa .tiny{font-size:12px}
+    #ewa .footer{margin-top:18px;text-align:center;font-size:12px;color:light-dark(#7a828e,#9098a5)}
+    #ewa .visualgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+    #ewa .visual{background:light-dark(#fafbfc,#11141a);border:1px solid light-dark(#e2e6ec,#2c323c);border-radius:16px;padding:12px;min-width:0}
+    #ewa .visual svg{width:100%;height:auto;display:block;aspect-ratio:16/9}
+    #ewa .visual h3{margin-top:10px}
+    #ewa .trainer{margin-top:14px}
+    #ewa .chartbox{background:light-dark(#fbfcfe,#101319);border:1px solid light-dark(#dfe3e9,#303640);border-radius:16px;padding:8px;overflow:hidden}
+    #ewa .chartbox svg{display:block;width:100%;height:auto}
+    #ewa .pick{cursor:pointer;outline:none}
+    #ewa .pick circle{fill:light-dark(#fff,#171a20);stroke:light-dark(#9aa3b1,#697386);stroke-width:2}
+    #ewa .pick text{fill:currentColor;font-size:13px;font-weight:800;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+    #ewa .pick.selected circle{fill:#6c7af7;stroke:#6c7af7}
+    #ewa .pick.selected text{fill:#fff}
+    #ewa .pick.correct circle{fill:#42a36a;stroke:#42a36a}
+    #ewa .pick.wrong circle{fill:#cf5d5d;stroke:#cf5d5d}
+    #ewa .correctLabel{fill:#42a36a;font-size:16px;font-weight:900;text-anchor:middle}
+    #ewa .rulebox{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+    #ewa .rule{border:1px solid light-dark(#e0e4ea,#303640);border-radius:14px;padding:12px}
+    #ewa .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;margin:10px 0}
+    #ewa .legend span{display:inline-flex;align-items:center;gap:6px}
+    #ewa .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+    #ewa .exerciseNav{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+    #ewa .dayplan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+    #ewa .daystep{border:1px solid light-dark(#e0e4ea,#303640);border-radius:14px;padding:12px;min-width:0}
+    #ewa .daystep strong{display:block;margin-bottom:5px}
+    #ewa .curriculum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+    #ewa .module{border:1px solid light-dark(#e0e4ea,#303640);border-radius:14px;padding:12px}
+    #ewa .review{border-left:4px solid #8b5cf6;padding-left:12px}
+    #ewa .reminderRow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-top:12px}
+    #ewa .lessonBrowser{margin-top:14px}
+    #ewa .lessonToolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    #ewa .lessonToolbar select{max-width:420px}
+    #ewa .lessonContent{border:1px solid light-dark(#e0e4ea,#303640);border-radius:16px;padding:16px;background:light-dark(#fbfcfe,#11141a)}
+    #ewa .lessonContent h3{margin-top:18px}
+    #ewa .lessonContent ul{padding-left:20px;line-height:1.55}
+    #ewa .lessonContent .example{border-left:4px solid #6c7af7;padding:10px 12px;margin:12px 0;background:rgba(108,122,247,.08);border-radius:8px}
+    #ewa .lessonContent .remember{border-left:4px solid #42a36a;padding:10px 12px;margin:12px 0;background:rgba(66,163,106,.08);border-radius:8px}
+    #ewa .lessonContent .warning{border-left:4px solid #e28b4e;padding:10px 12px;margin:12px 0;background:rgba(226,139,78,.08);border-radius:8px}
+    @media(max-width:780px){#ewa{padding:12px}#ewa .hero,#ewa .grid,#ewa .grid2,#ewa .calcrow,#ewa .visualgrid,#ewa .rulebox,#ewa .dayplan,#ewa .curriculum,#ewa .reminderRow{grid-template-columns:1fr}#ewa h1{font-size:34px}}
+  </style>
 
-  <main>
-    <section id="home" class="screen active">
-      <div class="hero">
-        <div class="chip">Heute: ca. 10 Minuten</div>
-        <h1>Eine kleine Lektion. Jeden Tag.</h1>
-        <p>Erst schauen. Dann verstehen. Dann selbst erklären. Fachbegriffe kommen immer erst ganz am Ende.</p>
-        <div class="progress"><div class="bar" id="overallBar"></div></div>
-        <p class="tiny" id="progressText">0 von 7 Lektionen geschafft</p>
-        <div class="actions"><button class="btn" id="continueBtn">Heute lernen</button><button class="btn alt" id="reviewBtn">Gestern wiederholen</button></div>
-      </div>
-
-      <div class="lesson-list" id="lessonList"></div>
-
-      <div class="card" style="margin-top:16px">
-        <h2>⏰ Deine Abendroutine</h2>
-        <p>20:00 Uhr: 5 Minuten Wiederholen + 5 Minuten neue Lektion. Danach eine Mini-Frage.</p>
-      </div>
-    </section>
-
-    <section id="learn" class="screen">
-      <div class="lesson-head"><button class="back" id="backBtn">←</button><div><b id="lessonTitle"></b><div class="tiny timer" id="timer">ca. 10 Min.</div></div></div>
+  <div class="wrap">
+    <section class="hero">
       <div class="card">
-        <div class="progress"><div class="bar" id="lessonBar"></div></div>
-        <div id="steps"></div>
-        <div class="actions" style="margin-top:18px"><button class="btn alt" id="prevStep">Zurück</button><button class="btn" id="nextStep">Weiter</button></div>
+        <span class="pill">📘 Anfänger-Modus</span>
+        <h1 style="margin-top:12px">Elliott Wave Academy</h1>
+        <p class="muted">Lerne Charts von Grund auf zu lesen – erst verstehen, dann anwenden. Ohne Vorwissen.</p>
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin:18px 0 8px">
+          <strong>Dein Lernfortschritt</strong><span class="muted">240 Lektionen · 24 Module</span>
+        </div>
+        <div class="progress"><span></span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+          <button class="btn primary" data-go="lernen">▶ Weiterlernen</button>
+          <button class="btn secondary" data-go="ueben">🎯 Übung starten</button>
+          <button class="btn secondary" data-go="installieren">📲 Auf Samsung installieren</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="score">5–10</div>
+        <div class="muted">Minuten pro Lektion</div>
+        <hr style="border:0;border-top:1px solid light-dark(#e7e9ed,#2a2f38);margin:16px 0">
+        <strong>Heute</strong>
+        <p style="margin:6px 0 0">Was ist ein Retracement?</p>
+        <p class="muted tiny">Du lernst zuerst die Idee, dann den Fachbegriff.</p>
       </div>
     </section>
 
-    <section id="routine" class="screen">
-      <div class="hero"><h1>Deine 10-Minuten-Routine</h1><p>Du musst nicht lange lernen. Wichtig ist, dass du oft wiederkommst.</p></div>
-      <div class="routine" style="margin-top:14px">
-        <div class="card"><div class="big-emoji">🔁</div><h2>3 Min.</h2><p>Gestern in eigenen Worten erklären.</p></div>
-        <div class="card"><div class="big-emoji">📘</div><h2>5 Min.</h2><p>Eine neue Idee lernen.</p></div>
-        <div class="card"><div class="big-emoji">🧠</div><h2>2 Min.</h2><p>Eine Frage ohne Nachsehen beantworten.</p></div>
-      </div>
-      <div class="card" style="margin-top:14px"><b>Goldene Regel:</b><p>Kannst du es einem Kind erklären, hast du es wahrscheinlich verstanden. Wenn nicht, gehe einen Schritt zurück.</p></div>
-    </section>
+    <nav class="tabs" aria-label="App-Navigation">
+      <button class="tab active" data-tab="lernen">🏠 Lernen</button>
+      <button class="tab" data-tab="ueben">📊 Üben</button>
+      <button class="tab" data-tab="analysieren">🔍 Analysieren</button>
+      <button class="tab" data-tab="werkzeuge">🧰 Werkzeuge</button>
+      <button class="tab" data-tab="glossar">📖 Glossar</button>
+      <button class="tab" data-tab="installieren">📲 Installieren</button>
+    </nav>
 
-    <section id="about" class="screen">
-      <div class="card"><h2>Wichtiger Hinweis</h2><p>Die App dient nur zum Lernen. Elliott-Wellen und Fibonacci-Marken sind keine sicheren Vorhersagen und keine Anlageberatung. Wellenzählungen können unterschiedlich interpretiert werden.</p>
-      <p class="install-note"><b>Als App installieren:</b> In Chrome/Edge über „App installieren“ bzw. im Browser-Menü „Zum Startbildschirm hinzufügen“. Auf iPhone/iPad in Safari: Teilen → „Zum Home-Bildschirm“.</p></div>
-    </section>
-  </main>
+    <main>
+      <section data-panel="lernen">
+        <div class="grid">
+          <div class="card"><span class="pill">Level 1</span><h3 style="margin-top:10px">Chart verstehen</h3><p class="muted">Was ist ein Kurs, eine Kerze, ein Hoch und ein Tief?</p></div>
+          <div class="card"><span class="pill">Level 2</span><h3 style="margin-top:10px">Trend erkennen</h3><p class="muted">Higher High, Higher Low und warum Kurse in Wellen laufen.</p></div>
+          <div class="card"><span class="pill">Level 3</span><h3 style="margin-top:10px">Elliott-Wellen</h3><p class="muted">1–2–3–4–5 und A–B–C verständlich erklärt.</p></div>
+          <div class="card"><span class="pill">Level 4</span><h3 style="margin-top:10px">Fibonacci</h3><p class="muted">Was Fibonacci überhaupt ist – bevor Prozente ins Spiel kommen.</p></div>
+          <div class="card"><span class="pill">Level 5</span><h3 style="margin-top:10px">Korrekturen</h3><p class="muted">Zigzag, Flat, Triangle und komplexere Strukturen.</p></div>
+          <div class="card"><span class="pill">Level 6+</span><h3 style="margin-top:10px">Analyse</h3><p class="muted">Counts, Alternativen, Invalidierung und Multi-Timeframe.</p></div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h2>Mini-Lektion: Was ist ein Retracement?</h2>
+          <div class="lesson"><div class="num">1</div><div><h3>Erst ohne Fachsprache</h3><p>Stell dir vor, ein Kurs steigt von <strong>100 € auf 200 €</strong>. Danach fällt er ein Stück zurück. Diese Rückbewegung ist zunächst einfach nur ein Teil des vorherigen Weges zurück.</p></div></div>
+          <div class="lesson"><div class="num">2</div><div><h3>Alltagsbeispiel</h3><p>Du gehst 100 Meter einen Berg hinauf und anschließend 50 Meter zurück. Du hast also <strong>50 %</strong> deines Weges zurückgenommen.</p></div></div>
+          <svg class="wave" viewBox="0 0 720 220" role="img" aria-label="Kurs steigt stark und fällt dann teilweise zurück">
+            <line x1="40" y1="180" x2="680" y2="180" stroke="currentColor" opacity=".18"/>
+            <polyline points="60,170 150,140 250,105 360,45 470,85 560,110 650,90" fill="none" stroke="#6c7af7" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="60" cy="170" r="7" fill="#6c7af7"/><circle cx="360" cy="45" r="7" fill="#6c7af7"/><circle cx="560" cy="110" r="7" fill="#8b5cf6"/>
+            <text x="45" y="205" fill="currentColor" font-size="16">100 €</text><text x="335" y="28" fill="currentColor" font-size="16">200 €</text><text x="535" y="140" fill="currentColor" font-size="16">Rücklauf</text>
+          </svg>
+          <div class="banner"><strong>Jetzt der Fachbegriff:</strong> Diese Rückbewegung nennt man <strong>Retracement</strong>.</div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h2>So läuft jeder Lerntag ab</h2>
+          <p class="muted">Jeder Tag verbindet neues Wissen mit Wiederholung. Erst verstehen, dann prüfen, dann am Chart anwenden.</p>
+          <div class="dayplan">
+            <div class="daystep"><strong>1 · Wiederholen</strong><span class="muted tiny">Quiz und Übung vom Vortag erneut lösen.</span></div>
+            <div class="daystep"><strong>2 · Lernen</strong><span class="muted tiny">Ein neuer Begriff oder eine neue Charttechnik mit Bildern.</span></div>
+            <div class="daystep"><strong>3 · Quiz</strong><span class="muted tiny">Kurze Verständnisfragen direkt nach der Lektion.</span></div>
+            <div class="daystep"><strong>4 · Anwenden</strong><span class="muted tiny">Wellen, Kerzen, Fibonacci oder Muster selbst im Chart bestimmen.</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h2>Vollständiger Lernpfad · 240 Lektionen</h2>
+        <p class="muted">Die Website ist als Langzeitkurs mit 24 Modulen zu je 10 Lektionen aufgebaut. Jede Lektion dauert etwa 5 bis 10 Minuten und verbindet Erklärung, Bild, Quiz und – sobald es um Charttechnik geht – eine praktische Übung. Am Folgetag werden zentrale Aufgaben der vorherigen Lektion automatisch zur Wiederholung eingeplant.</p>
+          <div class="curriculum">
+            <div class="module"><strong>1 · Börse verstehen · 10 Lektionen</strong><p class="muted tiny">Aktien, Börsenplätze, Käufer/Verkäufer, Kursbildung, Orderarten, Liquidität und grundlegende Marktmechanik.</p></div>
+            <div class="module"><strong>2 · Charts lesen · 10 Lektionen</strong><p class="muted tiny">Achsen, Linienchart, Balkenchart, Candlesticks, Open/High/Low/Close, Gaps und logarithmische Darstellung.</p></div>
+            <div class="module"><strong>3 · Candlesticks · 10 Lektionen</strong><p class="muted tiny">Körper, Dochte, bullische/bärische Kerzen, Doji, Hammer, Engulfing und Grenzen einzelner Kerzenmuster.</p></div>
+            <div class="module"><strong>4 · Marktstruktur · 10 Lektionen</strong><p class="muted tiny">Trend, Range, Swing High/Low, HH/HL/LH/LL, Strukturbrüche und Kontext.</p></div>
+            <div class="module"><strong>5 · Support & Resistance · 10 Lektionen</strong><p class="muted tiny">Zonen, Rollenwechsel, Mehrfachtests, horizontale Marken, Angebot/Nachfrage und Fehlinterpretationen.</p></div>
+            <div class="module"><strong>6 · Trendlinien & Kanäle · 10 Lektionen</strong><p class="muted tiny">Trendlinien, Parallelkanäle, Ausbrüche, Fehlausbrüche und Einführung Elliott-Channeling.</p></div>
+            <div class="module"><strong>7 · Elliott-Grundidee · 10 Lektionen</strong><p class="muted tiny">R. N. Elliott, 5-3-Zyklus, Motive/Corrective Waves, Fraktalität und Grundnotation.</p></div>
+            <div class="module"><strong>8 · Wellen-Grade · 10 Lektionen</strong><p class="muted tiny">Verschachtelung, Degree-Systeme, Unterwellen und saubere Beschriftung über mehrere Timeframes.</p></div>
+            <div class="module"><strong>9 · Impuls 1–5 · 10 Lektionen</strong><p class="muted tiny">Jede Impulswelle einzeln: typische Struktur, Psychologie, Momentum und häufige Anfängerfehler.</p></div>
+            <div class="module"><strong>10 · Harte Elliott-Regeln · 10 Lektionen</strong><p class="muted tiny">Welle 2, Welle 3, Welle 4, Regelverletzungen, gültige/ungültige Counts und Sonderfälle.</p></div>
+            <div class="module"><strong>11 · Elliott-Guidelines · 10 Lektionen</strong><p class="muted tiny">Alternation, Equality, Extensions, typische Proportionen, Wave Personality und Abgrenzung zu Regeln.</p></div>
+            <div class="module"><strong>12 · Diagonalen & Truncation · 10 Lektionen</strong><p class="muted tiny">Leading/Ending Diagonal, Überlappungen, Keilstruktur, verkürzte fünfte Welle und Fehlzählungen.</p></div>
+            <div class="module"><strong>13 · Zigzags · 10 Lektionen</strong><p class="muted tiny">5-3-5, Single/Double/Triple Zigzag, X-Wellen und Erkennung im Chart.</p></div>
+            <div class="module"><strong>14 · Flats · 10 Lektionen</strong><p class="muted tiny">Regular, Expanded, Running Flat, 3-3-5-Struktur, B- und C-Wellen und Abgrenzung zum Zigzag.</p></div>
+            <div class="module"><strong>15 · Triangles · 10 Lektionen</strong><p class="muted tiny">Contracting, Barrier, Expanding, A-B-C-D-E, Position im größeren Count und typische Fallen.</p></div>
+            <div class="module"><strong>16 · Komplexe Korrekturen · 10 Lektionen</strong><p class="muted tiny">W-X-Y, W-X-Y-X-Z, Double/Triple Three, Kombinationen und strukturierte Fehlerdiagnose.</p></div>
+            <div class="module"><strong>17 · Fibonacci Grundlagen · 10 Lektionen</strong><p class="muted tiny">Fibonacci-Folge, Goldener Schnitt, Prozentrechnung und Herleitung der wichtigsten Verhältnisse.</p></div>
+            <div class="module"><strong>18 · Fibonacci Retracements · 10 Lektionen</strong><p class="muted tiny">23,6/38,2/50/61,8/78,6 %, korrektes Anlegen, sinnvolle Interpretation und Fehlnutzung.</p></div>
+            <div class="module"><strong>19 · Fibonacci Extensions · 10 Lektionen</strong><p class="muted tiny">100/123,6/138,2/161,8/200/261,8 %, Projektionen, Zielzonen, Equality und Cluster.</p></div>
+            <div class="module"><strong>20 · Indikatoren & Momentum · 10 Lektionen</strong><p class="muted tiny">RSI, MACD, Volumen, Divergenzen, SMA/EMA und sinnvolle Bestätigung ohne Indikator-Überladung.</p></div>
+            <div class="module"><strong>21 · Multi-Timeframe-Analyse · 10 Lektionen</strong><p class="muted tiny">Monat bis Intraday, Top-down-Analyse, Degree-Konsistenz und Synchronisation mehrerer Zeitebenen.</p></div>
+            <div class="module"><strong>22 · Primary & Alternate Count · 10 Lektionen</strong><p class="muted tiny">Hauptcount, Alternativcount, Confirmation, Invalidierung, Szenariogewichtung und Unsicherheit.</p></div>
+            <div class="module"><strong>23 · Fundamentalanalyse & Quellen · 10 Lektionen</strong><p class="muted tiny">Umsatz, Gewinn, Cashflow, Schulden, Bewertung, Guidance sowie TradingView, IR, SEC und Register.</p></div>
+            <div class="module"><strong>24 · Praxis & Echtzeit-Training · 10 Lektionen</strong><p class="muted tiny">Historische Charts ohne Zukunftsdaten, komplette Counts, Fehleranalyse, Journal und Abschlussprüfungen.</p></div>
+          </div>
+          <div class="banner" style="margin-top:12px"><strong>Gesamtumfang:</strong> 240 Lektionen × 5–10 Minuten = rund 20–40 Stunden neuer Lernstoff. Durch tägliche Wiederholungen, Quiz und Chartübungen liegt die tatsächliche Trainingszeit deutlich höher.</div>
+          <div class="lessonBrowser">
+            <h2 style="margin-top:18px">Lektionsbibliothek mit echten Inhalten</h2>
+            <p class="muted">Die Themen sind nicht mehr nur Überschriften. Öffne eine Lektion und du erhältst Erklärung, Beispiel, Merksatz, typische Fehler und eine kurze Wissensprüfung. Die Inhalte bauen vom absoluten Anfänger bis zur vollständigen Elliott-Analyse aufeinander auf.</p>
+            <div class="lessonToolbar">
+              <select id="lessonSelect" aria-label="Lektion auswählen"></select>
+              <button class="btn primary" id="openLesson">Lektion öffnen</button>
+              <button class="btn secondary" id="prevLesson">← Zurück</button>
+              <button class="btn secondary" id="nextLesson">Weiter →</button>
+            </div>
+            <div id="lessonContent" class="lessonContent" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h2>Bildergalerie: Muster auf einen Blick</h2>
+          <p class="muted">Jede neue Idee wird zuerst als Bild gezeigt. Die Grafiken sind schematisch und dienen zum Lernen der Struktur.</p>
+          <div class="visualgrid">
+            <div class="visual"><svg viewBox="0 0 320 180" role="img" aria-label="Fünfteiliger Elliott-Impuls"><polyline points="18,150 72,105 105,130 178,48 220,86 292,28" fill="none" stroke="#6c7af7" stroke-width="6" stroke-linejoin="round"/><g fill="currentColor" font-size="15" font-weight="800"><text x="66" y="96">1</text><text x="101" y="148">2</text><text x="172" y="39">3</text><text x="216" y="104">4</text><text x="286" y="22">5</text></g></svg><h3>Impuls 1–2–3–4–5</h3><p class="muted tiny">Drei Bewegungen mit dem Trend, zwei Gegenbewegungen.</p></div>
+            <div class="visual"><svg viewBox="0 0 320 180" role="img" aria-label="ABC Korrektur"><polyline points="20,40 110,120 185,76 292,152" fill="none" stroke="#8b5cf6" stroke-width="6" stroke-linejoin="round"/><g fill="currentColor" font-size="15" font-weight="800"><text x="104" y="139">A</text><text x="181" y="66">B</text><text x="286" y="169">C</text></g></svg><h3>ABC-Korrektur</h3><p class="muted tiny">Nach einem Impuls folgt häufig eine dreiteilige Korrektur.</p></div>
+            <div class="visual"><svg viewBox="0 0 320 180" role="img" aria-label="Zigzag Korrektur"><polyline points="20,35 125,132 180,86 300,160" fill="none" stroke="#e28b4e" stroke-width="6"/><path d="M20 35 L55 68 L88 97 L125 132 M125 132 L153 105 L180 86 M180 86 L220 112 L258 137 L300 160" fill="none" stroke="#e28b4e" stroke-width="2" stroke-dasharray="4 4"/></svg><h3>Zigzag 5–3–5</h3><p class="muted tiny">Eine oft relativ deutliche Korrektur gegen den Trend.</p></div>
+            <div class="visual"><svg viewBox="0 0 320 180" role="img" aria-label="Flat Korrektur"><polyline points="20,55 110,126 196,48 298,136" fill="none" stroke="#4aa36b" stroke-width="6"/><line x1="20" y1="55" x2="298" y2="55" stroke="currentColor" opacity=".16" stroke-dasharray="5 5"/></svg><h3>Flat</h3><p class="muted tiny">Seitwärts wirkende Korrektur; B kann weit zurücklaufen.</p></div>
+            <div class="visual"><svg viewBox="0 0 320 180" role="img" aria-label="Triangle"><polyline points="20,35 75,145 130,62 184,126 238,82 295,108" fill="none" stroke="#d467a7" stroke-width="5"/><line x1="20" y1="35" x2="295" y2="100" stroke="currentColor" opacity=".2"/><line x1="75" y1="145" x2="295" y2="111" stroke="currentColor" opacity=".2"/></svg><h3>Triangle A–B–C–D–E</h3><p class="muted tiny">Die Ausschläge werden häufig enger.</p></div>
+            <div class="visual"><svg viewBox="0 0 320 180" role="img" aria-label="Fibonacci Retracement"><polyline points="20,150 150,34 295,94" fill="none" stroke="#6c7af7" stroke-width="6"/><g stroke="currentColor" opacity=".28" stroke-dasharray="4 4"><line x1="40" y1="63" x2="300" y2="63"/><line x1="40" y1="82" x2="300" y2="82"/><line x1="40" y1="94" x2="300" y2="94"/><line x1="40" y1="108" x2="300" y2="108"/></g><g fill="currentColor" font-size="11"><text x="44" y="59">23,6 %</text><text x="44" y="78">38,2 %</text><text x="44" y="90">50 %</text><text x="44" y="104">61,8 %</text></g></svg><h3>Fibonacci-Retracement</h3><p class="muted tiny">Prozentbereiche messen, wie viel der Bewegung zurückgenommen wird.</p></div>
+            <div class="visual"><svg viewBox="0 0 320 180" role="img" aria-label="Higher High Higher Low"><polyline points="20,145 78,88 118,118 184,58 228,88 298,30" fill="none" stroke="#4aa36b" stroke-width="6"/><g fill="currentColor" font-size="12" font-weight="700"><text x="70" y="78">HH</text><text x="110" y="137">HL</text><text x="177" y="48">HH</text><text x="221" y="107">HL</text></g></svg><h3>Aufwärtstrend</h3><p class="muted tiny">Höhere Hochs und höhere Tiefs bilden die Grundstruktur.</p></div>
+            <div class="visual"><svg viewBox="0 0 320 180" role="img" aria-label="Candlestick Anatomie"><line x1="160" y1="22" x2="160" y2="158" stroke="currentColor" stroke-width="4"/><rect x="125" y="62" width="70" height="62" rx="4" fill="#4aa36b"/><g fill="currentColor" font-size="12"><text x="205" y="28">High</text><text x="205" y="75">Open/Close</text><text x="205" y="155">Low</text></g></svg><h3>Candlestick</h3><p class="muted tiny">Eine Kerze zeigt Open, High, Low und Close eines Zeitraums.</p></div>
+            <div class="visual"><svg viewBox="0 0 320 180" role="img" aria-label="Bearishe Divergenz"><polyline points="20,130 95,86 155,108 235,48 300,64" fill="none" stroke="#6c7af7" stroke-width="5"/><polyline points="20,165 95,142 155,150 235,136 300,144" fill="none" stroke="#e28b4e" stroke-width="4"/><text x="205" y="25" fill="currentColor" font-size="12">Kurs höher</text><text x="205" y="172" fill="currentColor" font-size="12">Momentum schwächer</text></svg><h3>Divergenz</h3><p class="muted tiny">Der Kurs macht ein neues Hoch, Momentum bestätigt es aber nicht.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-panel="ueben" class="hidden">
+        <div class="card review" style="margin-bottom:14px">
+          <h2>Wiederholung vom Vortag</h2>
+          <p class="muted">Bevor du Neues lernst, wiederholst du die gestrige Lektion. In der installierbaren PWA wird der Lernstand lokal gespeichert und diese Wiederholung automatisch zusammengestellt.</p>
+          <div class="dayplan">
+            <div class="daystep"><strong>Begriff</strong><span class="muted tiny">Was bedeutet Retracement?</span></div>
+            <div class="daystep"><strong>Regel</strong><span class="muted tiny">Welche Elliott-Regel darf nie verletzt werden?</span></div>
+            <div class="daystep"><strong>Bild</strong><span class="muted tiny">Erkenne Impuls oder Korrektur.</span></div>
+            <div class="daystep"><strong>Praxis</strong><span class="muted tiny">Setze die Wellen 1–5 erneut im Chart.</span></div>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="card">
+            <h2>Fibonacci-Trainer</h2>
+            <p class="muted">Berechne zuerst ganz einfach, wie viel Prozent einer Bewegung zurückgenommen wurden.</p>
+            <div class="calcrow"><div><label for="start">Startkurs</label><input id="start" type="number" value="100" step="0.01"></div><div><label for="hoch">Hoch</label><input id="hoch" type="number" value="200" step="0.01"></div></div>
+            <div style="margin-top:12px"><label for="rueck">Kurs nach Rücklauf</label><input id="rueck" type="number" value="150" step="0.01"></div>
+            <button class="btn primary" id="calc" style="margin-top:12px">Berechnen</button>
+            <div class="result" id="calcResult">50 % Retracement</div>
+            <p class="muted tiny" id="calcExplain">Der Kurs hat 50 € von insgesamt 100 € Aufwärtsbewegung zurückgegeben.</p>
+          </div>
+
+          <div class="card">
+            <h2>Elliott-Regelquiz</h2>
+            <p><strong>Welche Aussage ist eine zwingende Regel für einen klassischen Impuls?</strong></p>
+            <button class="choice" data-correct="false">Welle 2 endet immer bei 61,8 %.</button>
+            <button class="choice" data-correct="true">Welle 3 darf nicht die kürzeste von 1, 3 und 5 sein.</button>
+            <button class="choice" data-correct="false">Welle 5 muss länger als Welle 1 sein.</button>
+            <div id="quizMsg" class="banner" style="margin-top:12px">Wähle eine Antwort.</div>
+          </div>
+        </div>
+
+        <div class="card trainer">
+          <h2>Interaktiver Wellentrainer</h2>
+          <p class="muted">Tippe im Chart nacheinander auf die Punkte, die deiner Meinung nach <strong>Welle 1, 2, 3, 4 und 5</strong> beenden. Es gibt absichtlich zusätzliche Zwischenpunkte.</p>
+          <div class="legend"><span><i class="dot" style="background:#6c7af7"></i>deine Auswahl</span><span><i class="dot" style="background:#42a36a"></i>richtige Lösung</span><span><i class="dot" style="background:#cf5d5d"></i>falscher Punkt</span></div>
+          <div class="chartbox">
+            <svg id="waveTrainer" viewBox="0 0 760 330" role="img" aria-label="Übungschart zum Bestimmen einer Elliott-Wellenfolge">
+              <g stroke="currentColor" opacity=".08"><line x1="30" y1="55" x2="730" y2="55"/><line x1="30" y1="120" x2="730" y2="120"/><line x1="30" y1="185" x2="730" y2="185"/><line x1="30" y1="250" x2="730" y2="250"/></g>
+              <polyline points="35,270 95,238 155,190 210,225 270,172 335,92 392,132 455,168 515,116 575,70 635,94 712,45" fill="none" stroke="#8b93a1" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <g class="pick" tabindex="0" role="button" data-id="1" transform="translate(95 238)"><circle r="14"/><text y="1">A</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="2" transform="translate(155 190)"><circle r="14"/><text y="1">B</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="3" transform="translate(210 225)"><circle r="14"/><text y="1">C</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="4" transform="translate(270 172)"><circle r="14"/><text y="1">D</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="5" transform="translate(335 92)"><circle r="14"/><text y="1">E</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="6" transform="translate(392 132)"><circle r="14"/><text y="1">F</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="7" transform="translate(455 168)"><circle r="14"/><text y="1">G</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="8" transform="translate(515 116)"><circle r="14"/><text y="1">H</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="9" transform="translate(575 70)"><circle r="14"/><text y="1">I</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="10" transform="translate(635 94)"><circle r="14"/><text y="1">J</text></g>
+              <g class="pick" tabindex="0" role="button" data-id="11" transform="translate(712 45)"><circle r="14"/><text y="1">K</text></g>
+              <g id="solutionLabels" class="hidden"><text class="correctLabel" x="155" y="167">1</text><text class="correctLabel" x="210" y="252">2</text><text class="correctLabel" x="335" y="70">3</text><text class="correctLabel" x="455" y="196">4</text><text class="correctLabel" x="712" y="24">5</text></g>
+            </svg>
+          </div>
+          <div class="exerciseNav"><button class="btn primary" id="checkWave">Auswahl prüfen</button><button class="btn secondary" id="resetWave">Neu versuchen</button><button class="btn secondary" id="showWaveSolution">Lösung anzeigen</button></div>
+          <div id="waveStatus" class="banner" aria-live="polite"><strong>Deine Aufgabe:</strong> Wähle fünf Punkte. Der erste gewählte Punkt ist Welle 1, der zweite Welle 2 usw.</div>
+          <div class="rulebox">
+            <div class="rule"><strong>Regel 1</strong><p class="muted tiny">Welle 2 darf nicht unter den Beginn von Welle 1 zurückfallen.</p></div>
+            <div class="rule"><strong>Regel 2</strong><p class="muted tiny">Welle 3 darf nicht die kürzeste der Wellen 1, 3 und 5 sein.</p></div>
+            <div class="rule"><strong>Regel 3</strong><p class="muted tiny">Bei einem normalen Impuls darf Welle 4 nicht in den Preisbereich von Welle 1 hineinlaufen.</p></div>
+          </div>
+        </div>
+
+        <div class="card trainer">
+          <h2>Welche Struktur siehst du?</h2>
+          <p class="muted">Trainiere zuerst die grobe Form. Danach kommt die exakte Unterwellenzählung.</p>
+          <svg class="wave" viewBox="0 0 720 220" role="img" aria-label="Dreiteilige fallende Korrektur"><polyline points="40,45 270,165 420,92 680,188" fill="none" stroke="#8b5cf6" stroke-width="7" stroke-linejoin="round"/></svg>
+          <button class="choice structureChoice" data-structure="impuls">Fünfteiliger Impuls</button>
+          <button class="choice structureChoice" data-structure="abc">ABC-Korrektur</button>
+          <button class="choice structureChoice" data-structure="triangle">Triangle</button>
+          <div id="structureMsg" class="banner" style="margin-top:12px">Wähle die Grundstruktur.</div>
+        </div>
+      </section>
+
+      <section data-panel="analysieren" class="hidden">
+        <div class="card">
+          <h2>Geführte Chartanalyse</h2>
+          <p class="muted">Arbeite immer in derselben Reihenfolge. So vermeidest du, dass du Wellen passend zu deiner Meinung zeichnest.</p>
+          <div class="steps">
+            <div class="step"><strong>Asset und Timeframe bestimmen</strong><br><span class="muted">Was analysierst du und auf welcher Zeitebene?</span></div>
+            <div class="step"><strong>Trend bestimmen</strong><br><span class="muted">Steigende Hochs/Tiefs, fallende Hochs/Tiefs oder Seitwärtsphase?</span></div>
+            <div class="step"><strong>Relevante Swing-Punkte markieren</strong><br><span class="muted">Nur wichtige Hochs und Tiefs – nicht jede kleine Bewegung.</span></div>
+            <div class="step"><strong>Elliott-Struktur vorschlagen</strong><br><span class="muted">Impuls, Korrektur oder noch unklar?</span></div>
+            <div class="step"><strong>Harte Regeln prüfen</strong><br><span class="muted">Verletzt der Count eine Elliott-Regel?</span></div>
+            <div class="step"><strong>Fibonacci messen</strong><br><span class="muted">Retracements und mögliche Extensions bestimmen.</span></div>
+            <div class="step"><strong>Alternativcount erstellen</strong><br><span class="muted">Welche andere gültige Erklärung gibt es?</span></div>
+            <div class="step"><strong>Invalidierung festlegen</strong><br><span class="muted">Ab welchem Preis ist dein Szenario eindeutig falsch?</span></div>
+            <div class="step"><strong>Technische und fundamentale Faktoren prüfen</strong><br><span class="muted">Bestätigungen und Gegenargumente sammeln.</span></div>
+            <div class="step"><strong>Fazit formulieren</strong><br><span class="muted">Szenario, Zielzone, Gegenargumente und Unsicherheit.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-panel="werkzeuge" class="hidden">
+        <div class="grid2">
+          <div class="card"><h3>TradingView</h3><p class="muted">Für Chartanalyse, Elliott-Markierungen, Fibonacci-Werkzeuge und technische Indikatoren.</p><span class="pill">Chart-Werkzeug</span></div>
+          <div class="card"><h3>Investor Relations</h3><p class="muted">Offizielle Geschäftsberichte, Quartalszahlen, Präsentationen und Unternehmensmeldungen.</p><span class="pill">Primärquelle</span></div>
+          <div class="card"><h3>SEC EDGAR</h3><p class="muted">Offizielle US-Unternehmensfilings wie 10-K, 10-Q und 8-K.</p><span class="pill">Primärquelle USA</span></div>
+          <div class="card"><h3>Unternehmensregister</h3><p class="muted">Offizielle Veröffentlichungen deutscher Unternehmen.</p><span class="pill">Primärquelle Deutschland</span></div>
+        </div>
+        <div class="banner" style="margin-top:14px"><strong>Grundregel:</strong> Nutze Aggregatoren zur Übersicht, aber prüfe wichtige Angaben möglichst in der Originalquelle.</div>
+      </section>
+
+      <section data-panel="glossar" class="hidden">
+        <div class="card">
+          <h2>Glossar für Anfänger</h2>
+          <div class="term"><strong>Retracement</strong><p class="muted">Eine Bewegung läuft einen Teil ihres vorherigen Weges wieder zurück.</p></div>
+          <div class="term"><strong>Extension</strong><p class="muted">Eine Projektion, mit der mögliche Ziele einer weiterlaufenden Bewegung abgeschätzt werden.</p></div>
+          <div class="term"><strong>Impuls</strong><p class="muted">Eine gerichtete Elliott-Bewegung, die typischerweise aus fünf Wellen besteht.</p></div>
+          <div class="term"><strong>Korrektur</strong><p class="muted">Eine Bewegung gegen den übergeordneten Trend oder eine Seitwärtsphase.</p></div>
+          <div class="term"><strong>Invalidierung</strong><p class="muted">Ein Preisniveau, bei dessen Überschreitung oder Unterschreitung dein aktueller Count nicht mehr gültig sein kann.</p></div>
+          <div class="term"><strong>Timeframe</strong><p class="muted">Die Zeiteinheit deines Charts, etwa 1 Stunde, 1 Tag oder 1 Woche pro Kerze.</p></div>
+          <div class="term"><strong>Fibonacci</strong><p class="muted">Eine Zahlenfolge, aus deren Verhältnissen in der Chartanalyse bestimmte Prozentbereiche abgeleitet werden.</p></div>
+        </div>
+      </section>
+
+      <section data-panel="installieren" class="hidden">
+        <div class="card">
+          <h2>Auf deinem Samsung installieren</h2>
+          <p class="muted">Diese ChatGPT-Version ist die Vorschau. Für ein eigenes App-Icon auf dem Startbildschirm brauchst du die PWA-Dateien auf einer HTTPS-Webadresse.</p>
+          <div class="steps">
+            <div class="step"><strong>PWA-Dateien bereitstellen</strong><br><span class="muted">Benötigt werden index.html, manifest.webmanifest, sw.js und App-Icons.</span></div>
+            <div class="step"><strong>Auf einen HTTPS-Host laden</strong><br><span class="muted">Zum Beispiel GitHub Pages. Eine lokale Datei allein reicht für die normale PWA-Installation nicht aus.</span></div>
+            <div class="step"><strong>Adresse in Chrome öffnen</strong><br><span class="muted">Öffne die veröffentlichte Adresse auf deinem Galaxy.</span></div>
+            <div class="step"><strong>App installieren</strong><br><span class="muted">Chrome-Menü → „App installieren“ bzw. „Zum Startbildschirm hinzufügen“.</span></div>
+          </div>
+          <div class="banner"><strong>Wichtig:</strong> Erst die separat erzeugte PWA-Version ist unabhängig von ChatGPT über ein eigenes Homescreen-Icon startbar.</div>
+          <div style="margin-top:18px">
+            <h3>Tägliche Lern-Erinnerung</h3>
+            <p class="muted">Eine normale PWA kann auf Android nicht zuverlässig jeden Abend selbstständig eine lokale Benachrichtigung auslösen, wenn sie vollständig geschlossen ist. Deshalb erstellt die App auf Wunsch einen täglichen Kalendereintrag mit Erinnerung – zuverlässig auch dann, wenn die Lern-App nicht geöffnet ist.</p>
+            <div class="reminderRow">
+              <div><label for="reminderTime">Gewünschte Uhrzeit</label><input id="reminderTime" type="time" value="20:00"></div>
+              <button class="btn primary" id="createReminder">Kalender-Erinnerung erstellen</button>
+            </div>
+            <div id="reminderStatus" class="banner" style="margin-top:10px" aria-live="polite">Standard: täglich um 20:00 Uhr.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">Lern-App-Prototyp · Elliott-Wellen sind ein Analysemodell, keine Garantie für zukünftige Kursbewegungen.</div>
+  </div>
+
+  <script>
+    (()=>{
+      const root=document.getElementById('ewa');
+      const tabs=[...root.querySelectorAll('[data-tab]')];
+      const panels=[...root.querySelectorAll('[data-panel]')];
+      function show(name){
+        tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
+        panels.forEach(p=>p.classList.toggle('hidden',p.dataset.panel!==name));
+      }
+      tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.tab)));
+      root.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.go)));
+
+      const calc=()=>{
+        const s=Number(root.querySelector('#start').value), h=Number(root.querySelector('#hoch').value), r=Number(root.querySelector('#rueck').value);
+        const out=root.querySelector('#calcResult'), exp=root.querySelector('#calcExplain');
+        if(!Number.isFinite(s)||!Number.isFinite(h)||!Number.isFinite(r)||h<=s){out.textContent='Bitte gültige Werte eingeben';exp.textContent='Das Hoch muss über dem Startkurs liegen.';return}
+        const move=h-s, back=h-r, pct=(back/move)*100;
+        if(back<0){out.textContent='Noch kein Retracement';exp.textContent='Der Kurs liegt oberhalb des vorherigen Hochs.';return}
+        out.textContent=`${Math.max(0,Math.min(999,pct)).toFixed(1).replace('.',',')} % Retracement`;
+        exp.textContent=`Der Kurs hat ${back.toFixed(2).replace('.',',')} € von insgesamt ${move.toFixed(2).replace('.',',')} € Bewegung zurückgegeben.`;
+      };
+      root.querySelector('#calc').addEventListener('click',calc);
+
+      root.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{
+        if(btn.classList.contains('structureChoice')) return;
+        root.querySelectorAll('.choice').forEach(x=>x.classList.remove('good','bad'));
+        const ok=btn.dataset.correct==='true';
+        btn.classList.add(ok?'good':'bad');
+        root.querySelector('#quizMsg').innerHTML=ok
+          ? '<strong>Richtig.</strong> Welle 3 darf nicht die kürzeste der Wellen 1, 3 und 5 sein.'
+          : '<strong>Nicht ganz.</strong> Das ist keine zwingende Elliott-Regel. Unterscheide immer zwischen Regel und häufig beobachteter Guideline.';
+      }));
+
+      const trainer=root.querySelector('#waveTrainer');
+      const picks=[...trainer.querySelectorAll('.pick')];
+      const chosen=[];
+      const correct=['2','3','5','7','11'];
+      const names={1:'A',2:'B',3:'C',4:'D',5:'E',6:'F',7:'G',8:'H',9:'I',10:'J',11:'K'};
+      const waveStatus=root.querySelector('#waveStatus');
+      const solutionLabels=root.querySelector('#solutionLabels');
+      function resetTrainer(){chosen.splice(0);picks.forEach(p=>p.classList.remove('selected','correct','wrong'));solutionLabels.classList.add('hidden');waveStatus.innerHTML='<strong>Deine Aufgabe:</strong> Wähle fünf Punkte. Der erste gewählte Punkt ist Welle 1, der zweite Welle 2 usw.'}
+      function choosePoint(p){
+        const id=p.dataset.id;
+        if(chosen.includes(id)){chosen.splice(chosen.indexOf(id),1);p.classList.remove('selected');return}
+        if(chosen.length>=5) return;
+        chosen.push(id);p.classList.add('selected');
+        waveStatus.innerHTML=`Ausgewählt: ${chosen.map((x,i)=>`Welle ${i+1} → Punkt ${names[x]}`).join(' · ')}`;
+      }
+      picks.forEach(p=>{p.addEventListener('click',()=>choosePoint(p));p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choosePoint(p)}})});
+      root.querySelector('#resetWave').addEventListener('click',resetTrainer);
+      root.querySelector('#showWaveSolution').addEventListener('click',()=>{solutionLabels.classList.remove('hidden');picks.forEach(p=>{if(correct.includes(p.dataset.id))p.classList.add('correct')});waveStatus.innerHTML='<strong>Lösung:</strong> B → C → E → G → K. Die grünen Punkte markieren die Enden der Wellen 1 bis 5.'});
+      root.querySelector('#checkWave').addEventListener('click',()=>{
+        if(chosen.length!==5){waveStatus.innerHTML=`<strong>Noch nicht fertig:</strong> Du hast ${chosen.length} von 5 Wellenpunkten gewählt.`;return}
+        let firstWrong=-1;
+        chosen.forEach((id,i)=>{const p=picks.find(x=>x.dataset.id===id);if(id===correct[i])p.classList.add('correct');else{p.classList.add('wrong');if(firstWrong<0)firstWrong=i}});
+        solutionLabels.classList.remove('hidden');
+        if(firstWrong<0){waveStatus.innerHTML='<strong>Richtig!</strong> Du hast die fünf Hauptwellen sauber erkannt. Besonders wichtig: Welle 3 ist die deutlich stärkste Trendbewegung, Welle 4 korrigiert, ohne den Bereich der Welle 1 zu verletzen.';return}
+        const explanations=[
+          'Deine Welle 1 endet zu früh oder zu spät. Suche den ersten klaren vollständigen Aufwärtsschub, nicht jede kleine Zwischenbewegung.',
+          'Deine Welle 2 liegt nicht am Ende der ersten klaren Gegenbewegung. Eine Welle 2 korrigiert Welle 1, bevor der nächste starke Trendschub beginnt.',
+          'Bei Welle 3 wurde ein Zwischenhoch gewählt. Die dritte Welle endet erst am Hoch des dominanten Trendschubs; kleine Pausen darin sind Unterwellen.',
+          'Deine Welle 4 endet nicht am Tief der größeren Korrektur nach Welle 3. Zwischenbewegungen innerhalb der Korrektur sind noch keine neue Hauptwelle.',
+          'Deine Welle 5 endet vor dem finalen Hoch. Eine Hauptwelle wird erst am Ende der gesamten Bewegung abgeschlossen.'
+        ];
+        waveStatus.innerHTML=`<strong>Noch nicht richtig.</strong> Der erste Fehler liegt bei Welle ${firstWrong+1}. ${explanations[firstWrong]} <br><br><strong>Richtige Folge:</strong> B → C → E → G → K. Die grünen Zahlen im Chart zeigen dir jetzt die korrekten Wellenenden.`;
+      });
+
+      root.querySelectorAll('.structureChoice').forEach(btn=>btn.addEventListener('click',()=>{
+        root.querySelectorAll('.structureChoice').forEach(x=>x.classList.remove('good','bad'));
+        const ok=btn.dataset.structure==='abc';btn.classList.add(ok?'good':'bad');
+        root.querySelector('#structureMsg').innerHTML=ok?'<strong>Richtig.</strong> Drei größere Bewegungen A–B–C: abwärts, Gegenbewegung, erneut abwärts.':'<strong>Falsch.</strong> Zähle zuerst nur die großen Richtungswechsel: abwärts → aufwärts → abwärts. Das ergibt eine dreiteilige ABC-Korrektur.';
+      }));
+
+      const lessonData=[
+        {title:'1 · Was ist eine Aktie?',topic:'Grundlagen',text:'Eine Aktie ist ein kleiner Eigentumsanteil an einem Unternehmen. Kaufst du eine Aktie, besitzt du wirtschaftlich einen winzigen Teil dieses Unternehmens. Der Börsenkurs zeigt, zu welchem Preis Käufer und Verkäufer diesen Anteil gerade handeln.',example:'Beispiel: Ein Unternehmen ist in 1.000 Aktien aufgeteilt. Besitzt du 10 Aktien, hältst du 1 % der ausgegebenen Aktien. Der Börsenkurs sagt aber nicht automatisch, ob das Unternehmen günstig oder teuer bewertet ist.',remember:'Merksatz: Aktie = Unternehmensanteil. Kurs = aktueller Marktpreis dieses Anteils.',warning:'Typischer Fehler: Aktienkurs und Unternehmenswert gleichsetzen. Ein Kurs von 20 € kann teurer bewertet sein als ein Kurs von 200 €, wenn unterschiedlich viele Aktien existieren.',quiz:'Was besitzt du mit einer Aktie?',answer:'Einen wirtschaftlichen Anteil am Unternehmen.'},
+        {title:'2 · Wie entsteht ein Börsenkurs?',topic:'Grundlagen',text:'Ein Börsenkurs entsteht dort, wo sich Kauf- und Verkaufsbereitschaft treffen. Viele Käufer mit hoher Zahlungsbereitschaft können Kurse nach oben treiben; viele Verkäufer mit niedriger Preisforderung können Kurse drücken. Der Kurs ist deshalb das laufende Ergebnis von Angebot und Nachfrage.',example:'Wenn die höchste Kauforder bei 99 € liegt und der günstigste Verkäufer 100 € verlangt, gibt es zunächst keinen Handel. Sobald ein Käufer 100 € akzeptiert, kann ein Geschäft zustande kommen.',remember:'Merksatz: Der Preis bewegt sich, weil Marktteilnehmer ihre Kauf- und Verkaufsbereitschaft verändern.',warning:'Typischer Fehler: Zu glauben, dass Kurse nur wegen Nachrichten steigen oder fallen. Nachrichten beeinflussen Erwartungen; gehandelt wird aber über konkrete Orders.',quiz:'Was bewegt einen Kurs unmittelbar?',answer:'Das Zusammenspiel von Kauf- und Verkaufsorders.'},
+        {title:'3 · Was ist ein Chart?',topic:'Charts',text:'Ein Chart ist eine grafische Darstellung von Kursdaten über die Zeit. Auf der waagerechten Achse liegt normalerweise die Zeit, auf der senkrechten Achse der Preis. Ein Chart zeigt, was bereits gehandelt wurde – nicht sicher, was als Nächstes passiert.',example:'Ein Tageschart kann jeden Handelstag als eine Kerze zeigen. Ein Stundenchart zeigt denselben Markt detaillierter, weil jede Kerze nur eine Stunde umfasst.',remember:'Merksatz: Chart = Preis über Zeit.',warning:'Typischer Fehler: Einen Chart wie eine Landkarte mit festem Ziel zu lesen. Chartanalyse arbeitet mit Szenarien und Wahrscheinlichkeiten.',quiz:'Was zeigt die y-Achse typischerweise?',answer:'Den Preis.'},
+        {title:'4 · Open, High, Low und Close',topic:'Candlesticks',text:'Eine Candlestick-Kerze fasst vier Preise eines Zeitraums zusammen: Open ist der Eröffnungskurs, High der höchste Kurs, Low der niedrigste Kurs und Close der Schlusskurs. Körper und Dochte machen diese Informationen visuell schnell erfassbar.',example:'Öffnet eine Tageskerze bei 100 €, steigt bis 108 €, fällt bis 97 € und schließt bei 105 €, dann sind O=100, H=108, L=97, C=105.',remember:'Merksatz: OHLC = Open, High, Low, Close.',warning:'Typischer Fehler: Eine einzelne Kerze ohne Kontext als Kauf- oder Verkaufssignal zu behandeln.',quiz:'Welche vier Werte enthält eine klassische Candlestick-Kerze?',answer:'Open, High, Low und Close.'},
+        {title:'5 · Timeframes verstehen',topic:'Charts',text:'Der Timeframe legt fest, wie viel Zeit eine Kerze umfasst. Auf einem 1-Stunden-Chart fasst jede Kerze eine Stunde zusammen, auf einem Tageschart einen Handelstag. Elliott-Wellen sind fraktal, deshalb kann dieselbe Bewegung auf verschiedenen Timeframes unterschiedlich strukturiert wirken.',example:'Eine große Welle 3 im Tageschart kann im Stundenchart aus fünf kleineren Unterwellen bestehen.',remember:'Merksatz: Gleicher Markt, anderer Timeframe, andere Detailtiefe.',warning:'Typischer Fehler: Wellen verschiedener Timeframes in derselben Zählung zu vermischen.',quiz:'Warum sind Timeframes bei Elliott wichtig?',answer:'Weil große Wellen aus kleineren Unterwellen bestehen.'},
+        {title:'6 · Aufwärtstrend und Abwärtstrend',topic:'Marktstruktur',text:'Ein Aufwärtstrend zeigt typischerweise höhere Hochs und höhere Tiefs. Ein Abwärtstrend zeigt tiefere Hochs und tiefere Tiefs. Diese einfache Marktstruktur ist wichtiger als viele komplizierte Indikatoren, weil sie direkt aus dem Preis abgeleitet wird.',example:'HH → HL → HH → HL spricht für eine intakte Aufwärtsstruktur. LH → LL → LH → LL spricht für eine Abwärtsstruktur.',remember:'Merksatz: Trend zuerst am Preis erkennen, nicht am Gefühl.',warning:'Typischer Fehler: Ein einziges höheres Hoch sofort als neuen Aufwärtstrend zu werten.',quiz:'Welche Folge ist typisch für einen Aufwärtstrend?',answer:'Höhere Hochs und höhere Tiefs.'},
+        {title:'7 · Swing High und Swing Low',topic:'Marktstruktur',text:'Ein Swing High ist ein markantes lokales Hoch, ein Swing Low ein markantes lokales Tief. Elliott-Zählungen orientieren sich an relevanten Wendepunkten. Nicht jede kleine Zuckung des Kurses ist automatisch eine eigene Hauptwelle.',example:'Wenn ein Kurs mehrfach kleine Zwischenhochs macht, aber erst danach deutlich korrigiert, kann nur das letzte Hoch der relevante Swing des größeren Degrees sein.',remember:'Merksatz: Zähle bedeutende Wendepunkte, nicht jede Kerze.',warning:'Typischer Fehler: Überzählen – aus jeder kleinen Bewegung eine eigene Elliott-Welle machen.',quiz:'Was ist für einen Swing entscheidend?',answer:'Ein markanter lokaler Wendepunkt im passenden Degree.'},
+        {title:'8 · Support und Resistance',topic:'Technische Analyse',text:'Support ist ein Preisbereich, an dem Nachfrage wiederholt stärker wurde. Resistance ist ein Bereich, an dem Angebot wiederholt stärker wurde. Beides sind besser als Zonen und nicht als millimetergenaue Linien zu verstehen.',example:'Reagiert ein Kurs mehrfach zwischen 98 € und 101 €, kann dieser Bereich als Unterstützungszone betrachtet werden.',remember:'Merksatz: Zonen statt exakter Linien.',warning:'Typischer Fehler: Zu glauben, Support müsse immer halten oder Resistance müsse immer stoppen.',quiz:'Sind Support und Resistance Garantien?',answer:'Nein, sie sind potenzielle Reaktionszonen.'},
+        {title:'9 · Die Elliott-Grundidee: 5–3',topic:'Elliott',text:'Das klassische Elliott-Grundmodell beschreibt eine Bewegung in Trendrichtung mit fünf Wellen 1–2–3–4–5 und anschließend eine Korrektur mit drei Wellen A–B–C. Diese Struktur kann wiederum Teil einer noch größeren Welle sein.',example:'In einem Aufwärtstrend bewegen sich 1, 3 und 5 nach oben; 2 und 4 korrigieren. Danach kann A-B-C die gesamte Fünferbewegung teilweise korrigieren.',remember:'Merksatz: 5 mit dem Trend, 3 dagegen – als Grundmodell.',warning:'Typischer Fehler: Zu erwarten, dass jeder reale Chart perfekt und sofort wie ein Lehrbuchbild aussieht.',quiz:'Wie heißen die drei Korrekturwellen?',answer:'A, B und C.'},
+        {title:'10 · Was bedeutet fraktal?',topic:'Elliott',text:'Fraktal bedeutet hier, dass ähnliche Wellenstrukturen auf verschiedenen Größenordnungen auftreten. Eine große Welle kann aus kleineren Elliott-Wellen bestehen, die ihrerseits wieder Unterwellen enthalten.',example:'Eine Tageschart-Welle 1 kann im Stundenchart selbst als 1–2–3–4–5 sichtbar werden.',remember:'Merksatz: Wellen bestehen aus Wellen.',warning:'Typischer Fehler: Unterwellen und übergeordnete Wellen mit denselben Labels zu vermischen.',quiz:'Was bedeutet Fraktalität bei Elliott?',answer:'Große Wellen bestehen aus kleineren Wellenstrukturen.'},
+        {title:'11 · Welle 1 verstehen',topic:'Impuls',text:'Welle 1 ist der erste mögliche Schub eines neuen Trends. Sie ist in Echtzeit oft schwer zu erkennen, weil der vorherige Trend psychologisch noch präsent ist. Erst die nachfolgende Struktur macht häufig klar, dass tatsächlich eine neue Bewegung begonnen haben könnte.',example:'Nach einem langen Abwärtstrend steigt der Kurs erstmals deutlich. Viele Marktteilnehmer halten das noch für eine bloße Gegenbewegung – genau deshalb ist Welle 1 oft unscheinbar.',remember:'Merksatz: Welle 1 ist der mögliche Start, nicht der Beweis eines neuen Trends.',warning:'Typischer Fehler: Jede erste Gegenbewegung automatisch als Welle 1 zu bezeichnen.',quiz:'Warum ist Welle 1 schwer zu erkennen?',answer:'Weil der vorherige Trend noch als dominante Erwartung wirkt.'},
+        {title:'12 · Welle 2 und ihre harte Grenze',topic:'Impuls',text:'Welle 2 korrigiert Welle 1. Die wichtigste harte Regel lautet: Welle 2 darf den Start von Welle 1 nicht überschreiten. Wie tief sie retraced, ist dagegen nur eine Guideline und kann variieren.',example:'Beginnt Welle 1 bei 100 € und endet bei 120 €, darf eine als Welle 2 bezeichnete Korrektur nicht unter 100 € fallen.',remember:'Merksatz: Welle 2 darf den Ursprung von Welle 1 nicht brechen.',warning:'Typischer Fehler: 61,8 % als Pflichtwert zu behandeln. Fibonacci-Level sind keine harte Elliott-Regel.',quiz:'Was invalidiert eine Welle 2 im Impuls?',answer:'Wenn sie den Start von Welle 1 überschreitet.'},
+        {title:'13 · Welle 3',topic:'Impuls',text:'Welle 3 ist häufig die dynamischste Welle eines Impulses. Die harte Regel lautet jedoch nicht, dass sie immer die längste sein muss. Sie darf lediglich nicht die kürzeste der Motive Waves 1, 3 und 5 sein.',example:'Sind Welle 1 = 20 Punkte, Welle 3 = 30 Punkte und Welle 5 = 40 Punkte lang, ist Welle 3 nicht die längste, aber die Regel ist erfüllt.',remember:'Merksatz: Welle 3 muss nicht die längste sein – sie darf nur nicht die kürzeste sein.',warning:'Typischer Fehler: Jede starke Bewegung als Welle 3 zu etikettieren, ohne die Gesamtstruktur zu prüfen.',quiz:'Welche Aussage über Welle 3 ist zwingend?',answer:'Sie darf nicht die kürzeste von 1, 3 und 5 sein.'},
+        {title:'14 · Welle 4',topic:'Impuls',text:'Welle 4 korrigiert die vorangegangene Welle 3. In einem klassischen Impuls darf sie nicht in den Preisbereich von Welle 1 eindringen. Diagonalen sind eine wichtige Ausnahme, die separat gelernt werden muss.',example:'Endet Welle 1 bei 120 €, darf eine klassische Welle 4 in einem Aufwärtsimpuls nicht unter 120 € fallen.',remember:'Merksatz: Klassischer Impuls = keine Überlappung von Welle 4 mit Welle 1.',warning:'Typischer Fehler: Die Regel ohne Prüfung auf eine Diagonalstruktur anzuwenden.',quiz:'Wann ist eine Überlappung von Welle 4 und Welle 1 erlaubt?',answer:'Bei bestimmten Diagonalstrukturen, nicht beim klassischen Impuls.'},
+        {title:'15 · Welle 5 und Truncation',topic:'Impuls',text:'Welle 5 beendet den Impuls. Oft erreicht sie ein neues Hoch beziehungsweise Tief, aber es kann eine Truncation auftreten: Dann schafft Welle 5 kein neues Extrem über Welle 3 hinaus.',example:'Welle 3 endet bei 150 €, Welle 4 fällt auf 138 €, Welle 5 steigt nur auf 148 € und dreht. Das kann eine verkürzte fünfte Welle sein.',remember:'Merksatz: Eine fünfte Welle muss nicht zwingend ein neues Extrem schaffen.',warning:'Typischer Fehler: Jede schwache fünfte Welle sofort als Truncation zu erklären, statt andere Counts zu prüfen.',quiz:'Was ist eine Truncation?',answer:'Eine verkürzte fünfte Welle, die das Ende von Welle 3 nicht übertrifft.'},
+        {title:'16 · Regeln vs. Guidelines',topic:'Elliott',text:'Eine Regel darf in der betreffenden Struktur nicht verletzt werden. Eine Guideline beschreibt nur ein häufiges Verhalten. Diese Trennung ist zentral, weil viele Fehler entstehen, wenn typische Fibonacci-Verhältnisse oder Alternation fälschlich als Pflicht behandelt werden.',example:'Welle 2 darf den Start von Welle 1 nicht überschreiten = Regel. Welle 2 retraced häufig relativ tief = Guideline.',remember:'Merksatz: Regel = muss. Guideline = häufig, aber nicht zwingend.',warning:'Typischer Fehler: Wahrscheinlichkeiten in absolute Aussagen umzuwandeln.',quiz:'Ist ein 61,8-%-Retracement von Welle 2 Pflicht?',answer:'Nein, das ist keine harte Elliott-Regel.'},
+        {title:'17 · Was ist Fibonacci?',topic:'Fibonacci',text:'Fibonacci bezeichnet eine Zahlenfolge, bei der jede neue Zahl aus der Summe der beiden vorherigen entsteht: 0, 1, 1, 2, 3, 5, 8, 13, 21 und so weiter. Aus Verhältnissen dieser Zahlen ergeben sich Werte, die in der Chartanalyse häufig verwendet werden.',example:'13 ÷ 21 ≈ 0,619. Daraus ergibt sich näherungsweise das bekannte Verhältnis von 61,8 %.',remember:'Merksatz: Fibonacci ist zuerst eine Zahlenfolge – die Prozentwerte werden daraus abgeleitet.',warning:'Typischer Fehler: Fibonacci-Level als magische Naturgesetze der Börse zu behandeln.',quiz:'Wie entsteht die nächste Fibonacci-Zahl?',answer:'Durch Addition der beiden vorherigen Zahlen.'},
+        {title:'18 · Was ist ein Retracement?',topic:'Fibonacci',text:'Ein Retracement beschreibt, wie viel einer vorherigen Bewegung zurückgenommen wird. Steigt ein Kurs von 100 auf 200 und fällt danach auf 150, wurden 50 von 100 Punkten zurückgenommen – also 50 %.',example:'100 → 200 = Bewegung von 100 Punkten. 200 → 138,20 bedeutet 61,80 Punkte Rücklauf = 61,8 % Retracement.',remember:'Merksatz: Retracement misst den Rückweg.',warning:'Typischer Fehler: Retracement und Extension zu verwechseln.',quiz:'Was misst ein Retracement?',answer:'Wie viel der vorherigen Bewegung zurückgenommen wurde.'},
+        {title:'19 · Fibonacci-Extensions',topic:'Fibonacci',text:'Extensions projizieren mögliche Ziele über eine Ausgangsbewegung hinaus. Werte wie 100 %, 123,6 %, 161,8 %, 200 % oder 261,8 % werden genutzt, um potenzielle Zielzonen zu untersuchen.',example:'Ist Welle 1 20 Punkte lang und Welle 3 projiziert 161,8 % davon, ergibt sich eine Projektion von ungefähr 32,36 Punkten ab dem Ausgangspunkt der Messung.',remember:'Merksatz: Retracement = Rücklauf, Extension = Projektion nach vorn.',warning:'Typischer Fehler: 161,8 % als garantiertes Ziel für Welle 3 zu behandeln.',quiz:'Wofür nutzt man Extensions?',answer:'Für mögliche Projektions- und Zielbereiche.'},
+        {title:'20 · Zigzag 5–3–5',topic:'Korrekturen',text:'Ein Zigzag ist eine typische A-B-C-Korrektur. Seine innere Struktur wird als 5–3–5 beschrieben: A und C sind motive Fünferstrukturen, B ist eine korrektive Dreierstruktur.',example:'Nach einem Aufwärtsimpuls fällt A deutlich, B erholt sich teilweise und C setzt die Korrektur erneut abwärts fort.',remember:'Merksatz: Zigzag = A fünf, B drei, C fünf.',warning:'Typischer Fehler: Jede ABC-Korrektur automatisch als Zigzag zu bezeichnen.',quiz:'Welche innere Struktur besitzt ein Zigzag?',answer:'5–3–5.'},
+        {title:'21 · Flat 3–3–5',topic:'Korrekturen',text:'Ein Flat ist eine eher seitwärts wirkende A-B-C-Korrektur mit 3–3–5-Struktur. A besteht aus drei Teilwellen, B ebenfalls aus drei, C aus fünf. B kann weit in Richtung des Ausgangsniveaus zurücklaufen.',example:'Beim Expanded Flat kann B sogar über den Start von A hinausgehen, bevor C deutlich in Gegenrichtung läuft.',remember:'Merksatz: Flat = 3–3–5.',warning:'Typischer Fehler: Ein weit laufendes B als Beweis für einen neuen Trend zu interpretieren.',quiz:'Wie ist ein Flat typischerweise aufgebaut?',answer:'3–3–5.'},
+        {title:'22 · Triangle A–B–C–D–E',topic:'Korrekturen',text:'Ein Triangle besteht aus fünf korrektiven Segmenten A-B-C-D-E. Häufig verengt sich die Preisspanne. Triangles treten typischerweise vor der letzten Bewegung einer größeren Struktur auf.',example:'Die Hochs werden tiefer und die Tiefs höher – so kann sich ein contracting triangle bilden.',remember:'Merksatz: Triangle = fünf korrektive Segmente A bis E.',warning:'Typischer Fehler: Jede Seitwärtsrange als Elliott-Triangle zu werten.',quiz:'Wie viele Hauptsegmente besitzt ein Elliott-Triangle?',answer:'Fünf: A, B, C, D und E.'},
+        {title:'23 · Primary und Alternate Count',topic:'Analyse',text:'Der Primary Count ist dein bevorzugtes aktuelles Szenario. Der Alternate Count ist eine ebenfalls regelkonforme Alternative. Elliott-Analyse wird robuster, wenn du nicht nur eine Geschichte erzwingst, sondern mehrere zulässige Möglichkeiten vergleichst.',example:'Primary: laufende Welle 4. Alternate: gesamte Fünferbewegung bereits abgeschlossen und ABC-Korrektur begonnen.',remember:'Merksatz: Ein guter Count braucht eine plausible Alternative.',warning:'Typischer Fehler: Einen Count trotz Regelverletzung beizubehalten, nur weil er zur eigenen Marktmeinung passt.',quiz:'Warum braucht man einen Alternate Count?',answer:'Weil mehrere regelkonforme Strukturen gleichzeitig möglich sein können.'},
+        {title:'24 · Invalidierung',topic:'Analyse',text:'Invalidierung bedeutet: Welches Preisereignis würde beweisen, dass dein aktueller Count nicht mehr gültig sein kann? Ein sauberer Count braucht ein klares Invalidationsniveau.',example:'Wenn du eine laufende Welle 2 zählst, liegt die Invalidierung am Start von Welle 1. Wird dieser gebrochen, ist dieser konkrete Impulscount ungültig.',remember:'Merksatz: Kein Count ohne Invalidierung.',warning:'Typischer Fehler: Nach einem Bruch des Invalidationslevels einfach die Labels zu verschieben, ohne die Analyse neu aufzubauen.',quiz:'Was beantwortet ein Invalidationslevel?',answer:'Wann ein konkreter Count nicht mehr gültig sein kann.'}
+      ];
+      const fullModules=[
+        {name:'Börse verstehen',topic:'Grundlagen',titles:['Was ist eine Aktie?','Was ist eine Börse?','Käufer und Verkäufer','Wie entsteht ein Kurs?','Bid und Ask','Was ist der Spread?','Market- und Limit-Order','Liquidität verstehen','Volatilität verstehen','Marktmechanik zusammenfassen'],focus:'wie Börsenhandel technisch funktioniert und warum Kurse durch konkrete Kauf- und Verkaufsentscheidungen entstehen'},
+        {name:'Charts lesen',topic:'Charts',titles:['Was ist ein Chart?','Preis- und Zeitachse','Linienchart','Balkenchart','Candlestick-Chart','Open, High, Low, Close','Gaps','Lineare und logarithmische Skala','Timeframes','Chart-Grundlagen zusammenfassen'],focus:'wie Kursdaten dargestellt werden und welche Informationen ein Chart tatsächlich enthält'},
+        {name:'Candlesticks',topic:'Candlesticks',titles:['Kerzenkörper','Dochte','Bullische Kerze','Bärische Kerze','Doji','Hammer','Shooting Star','Engulfing','Kerzen immer im Kontext lesen','Candlesticks zusammenfassen'],focus:'wie einzelne Kerzen entstehen, welche Marktinformation sie tragen und warum der Kontext wichtiger ist als ein einzelnes Muster'},
+        {name:'Marktstruktur',topic:'Marktstruktur',titles:['Was ist ein Trend?','Aufwärtstrend','Abwärtstrend','Seitwärtsphase','Swing High','Swing Low','Higher High und Higher Low','Lower High und Lower Low','Strukturbruch','Marktstruktur zusammenfassen'],focus:'wie du den Trend direkt aus Hochs, Tiefs und markanten Wendepunkten liest'},
+        {name:'Support & Resistance',topic:'Technische Analyse',titles:['Unterstützung','Widerstand','Zonen statt Linien','Rollenwechsel','Mehrfachtests','False Breaks','Angebot und Nachfrage','Konfluenz','Typische Fehler','Support und Resistance zusammenfassen'],focus:'wie Preiszonen entstehen, an denen Marktteilnehmer wiederholt reagieren, ohne daraus eine Garantie abzuleiten'},
+        {name:'Trendlinien & Kanäle',topic:'Technische Analyse',titles:['Trendlinie','Korrekte Ankerpunkte','Parallelkanal','Kanalbruch','Fehlausbruch','Beschleunigte Trends','Elliott-Channeling Einführung','Kanal im Impuls','Kanal in Korrekturen','Kanäle zusammenfassen'],focus:'wie Linien und Kanäle Struktur sichtbar machen und später Elliott-Zählungen ergänzen'},
+        {name:'Elliott-Grundidee',topic:'Elliott',titles:['Ralph Nelson Elliott','Warum spricht man von Wellen?','Der 5-3-Zyklus','Motive Waves','Corrective Waves','Fraktalität','Unterwellen','Grundnotation','Psychologie der Wellen','Elliott-Grundlagen zusammenfassen'],focus:'wie Elliott Marktbewegungen als verschachtelte motive und corrective Strukturen beschreibt'},
+        {name:'Wellen-Grade',topic:'Elliott',titles:['Was ist ein Degree?','Große und kleine Wellen','Verschachtelung','Beschriftungssystem','Top-down denken','Degree-Fehler','Unterwellen zählen','Mehrere Timeframes','Degree-Praxis','Wellen-Grade zusammenfassen'],focus:'wie du verschiedene Größenordnungen von Wellen sauber auseinanderhältst'},
+        {name:'Impuls 1–5',topic:'Impuls',titles:['Welle 1','Welle 2','Welle 3','Welle 4','Welle 5','Der vollständige Impuls','Wave Personality','Momentum im Impuls','Typische Fehlzählungen','Impuls zusammenfassen'],focus:'wie ein klassischer fünfteiliger Impuls aufgebaut ist und welche Rolle jede einzelne Welle übernimmt'},
+        {name:'Harte Elliott-Regeln',topic:'Elliott',titles:['Regel oder Guideline?','Die Welle-2-Regel','Die Welle-3-Regel','Die Welle-4-Regel','Gültiger Impuls','Ungültiger Impuls','Regelverletzungen erkennen','Sonderfall Diagonale','Prüfalgorithmus','Harte Regeln zusammenfassen'],focus:'welche Bedingungen zwingend erfüllt sein müssen und wann ein Count verworfen werden muss'},
+        {name:'Elliott-Guidelines',topic:'Elliott',titles:['Alternation','Equality','Extensions','Wave Personality vertiefen','Proportionen','Zeitbeziehungen','Momentum-Hinweise','Fibonacci als Guideline','Guidelines richtig gewichten','Guidelines zusammenfassen'],focus:'welche häufigen, aber nicht zwingenden Eigenschaften bei Elliott-Strukturen beobachtet werden'},
+        {name:'Diagonalen & Truncation',topic:'Elliott',titles:['Leading Diagonal','Ending Diagonal','Keilstruktur','Überlappungen','Innere Struktur','Truncation','Diagonal oder Impuls?','Typische Fehler','Diagonal-Praxis','Diagonalen zusammenfassen'],focus:'wie Sonderformen des motive patterns aussehen und warum sie nicht mit klassischen Impulsen verwechselt werden dürfen'},
+        {name:'Zigzags',topic:'Korrekturen',titles:['Zigzag Einführung','Die 5-3-5-Struktur','Welle A im Zigzag','Welle B im Zigzag','Welle C im Zigzag','Double Zigzag','Triple Zigzag','X-Wellen','Zigzag erkennen','Zigzags zusammenfassen'],focus:'wie scharfe Korrekturen aufgebaut sind und wie sich einfache und kombinierte Zigzags unterscheiden'},
+        {name:'Flats',topic:'Korrekturen',titles:['Flat Einführung','Die 3-3-5-Struktur','Regular Flat','Expanded Flat','Running Flat','Die B-Welle im Flat','Die C-Welle im Flat','Flat oder Zigzag?','Flat-Praxis','Flats zusammenfassen'],focus:'wie seitwärts wirkende Korrekturen aufgebaut sind und warum besonders die B-Welle täuschen kann'},
+        {name:'Triangles',topic:'Korrekturen',titles:['Triangle Einführung','A-B-C-D-E','Contracting Triangle','Barrier Triangle','Expanding Triangle','Position im größeren Count','Thrust nach dem Triangle','Triangle oder Range?','Triangle-Praxis','Triangles zusammenfassen'],focus:'wie fünfteilige korrektive Seitwärtsstrukturen entstehen und an welcher Stelle sie typischerweise auftreten'},
+        {name:'Komplexe Korrekturen',topic:'Korrekturen',titles:['W-X-Y','W-X-Y-X-Z','Double Three','Triple Three','Muster kombinieren','Die X-Welle','Komplexität erkennen','Nicht überzählen','Praxis komplexe Korrektur','Komplexe Korrekturen zusammenfassen'],focus:'wie mehrere Korrekturformen miteinander verbunden werden und wie du unnötig komplizierte Counts vermeidest'},
+        {name:'Fibonacci Grundlagen',topic:'Fibonacci',titles:['Wer war Fibonacci?','Die Fibonacci-Folge','Wie die Folge entsteht','Goldener Schnitt','Verhältnisse ableiten','Prozentrechnung für Anfänger','38,2 Prozent verstehen','50 Prozent verstehen','61,8 Prozent verstehen','Fibonacci-Grundlagen zusammenfassen'],focus:'woher die Fibonacci-Zahlen kommen und wie daraus die in Charts verwendeten Verhältnisse entstehen'},
+        {name:'Fibonacci Retracements',topic:'Fibonacci',titles:['Was ist ein Retracement?','23,6 Prozent','38,2 Prozent','50 Prozent','61,8 Prozent','78,6 Prozent','Werkzeug korrekt anlegen','Retracement im Aufwärtstrend','Retracement im Abwärtstrend','Retracements zusammenfassen'],focus:'wie du Rückläufe einer vorherigen Bewegung misst und Fibonacci-Level als Zonen statt als Gewissheit behandelst'},
+        {name:'Fibonacci Extensions',topic:'Fibonacci',titles:['Was ist eine Extension?','100 Prozent','123,6 Prozent','138,2 Prozent','161,8 Prozent','200 Prozent','261,8 Prozent','Welle-3-Projektion','Welle-5- und C-Projektion','Extensions zusammenfassen'],focus:'wie du mögliche Ziele einer laufenden Bewegung projizierst, ohne daraus starre Kursziele zu machen'},
+        {name:'Indikatoren & Momentum',topic:'Technische Analyse',titles:['Volumen','RSI','Überkauft und überverkauft','Divergenz','MACD','SMA','EMA','Indikator-Konfluenz','Indikator-Fehler','Indikatoren zusammenfassen'],focus:'wie ergänzende Indikatoren Momentum und Beteiligung sichtbar machen, ohne die Preisstruktur zu ersetzen'},
+        {name:'Multi-Timeframe-Analyse',topic:'Analyse',titles:['Warum mehrere Timeframes?','Monatschart','Wochenchart','Tageschart','4-Stunden-Chart','1-Stunden-Chart','Top-down-Ablauf','Degrees synchronisieren','Multi-Timeframe-Praxis','Multi-Timeframe zusammenfassen'],focus:'wie du große und kleine Zeitebenen in eine konsistente Elliott-Zählung integrierst'},
+        {name:'Primary & Alternate Count',topic:'Analyse',titles:['Primary Count','Alternate Count','Warum Alternativen?','Invalidierung','Confirmation','Szenarien gewichten','Wann wechselt der Count?','Mehrdeutigkeit akzeptieren','Praxis Countvergleich','Counts zusammenfassen'],focus:'wie du mehrere regelkonforme Szenarien vergleichst und anhand von Invalidierung und Bestätigung entscheidest'},
+        {name:'Fundamentalanalyse & Quellen',topic:'Fundamentalanalyse',titles:['Umsatz','Gewinn','Marge','Cashflow','Verschuldung','KGV','Guidance','Geschäftsmodell und Risiken','Primärquellen und Werkzeuge','Fundamentalanalyse zusammenfassen'],focus:'wie du das Unternehmen hinter dem Chart bewertest und wichtige Daten möglichst aus Primärquellen prüfst'},
+        {name:'Praxis & Echtzeit-Training',topic:'Praxis',titles:['Der vollständige Analyse-Workflow','Historische Charts ohne Zukunft','Impuls-Übung','ABC-Übung','Zigzag-Übung','Flat-Übung','Triangle-Übung','Fibonacci-Übung','Vollständiger Count','Abschlussprüfung'],focus:'wie du alle Bausteine in einer realistischen Analyse zusammenführst und Hindsight Bias vermeidest'}
+      ];
+      const detailByKeyword={
+        'Aktie':'Eine Aktie ist ein handelbarer Eigentumsanteil an einem Unternehmen. Der Stückpreis allein sagt nichts darüber aus, ob das Unternehmen günstig oder teuer ist; dafür braucht man unter anderem die Anzahl ausstehender Aktien und die Marktkapitalisierung.',
+        'Börse':'Eine Börse organisiert den Handel nach festgelegten Regeln. Sie bringt Kauf- und Verkaufsaufträge zusammen und stellt sicher, dass Preise, Stückzahlen und Ausführungen nachvollziehbar zustande kommen.',
+        'Bid':'Bid ist der höchste aktuell sichtbare Kaufpreis, Ask der niedrigste sichtbare Verkaufspreis. Dazwischen liegt der Spread. Je enger der Spread, desto geringer ist typischerweise die unmittelbare Handelsreibung.',
+        'Spread':'Der Spread ist die Differenz zwischen bestem Kauf- und Verkaufspreis. Er ist eine echte Kostenkomponente, besonders bei wenig liquiden Märkten oder in hektischen Phasen.',
+        'Liquidität':'Liquidität beschreibt, wie leicht große oder kleine Orders ausgeführt werden können, ohne den Preis stark zu bewegen. Hohe Liquidität bedeutet meist engere Spreads und stabilere Ausführung.',
+        'Volatilität':'Volatilität beschreibt die Schwankungsintensität. Hohe Volatilität bedeutet größere Bewegungen, aber nicht automatisch einen klareren Trend.',
+        'Chart':'Ein Chart ordnet Kursdaten entlang der Zeit. Er zeigt beobachtete Preise, nicht die Zukunft. Gute Analyse beginnt deshalb mit Beschreibung und erst danach mit Interpretation.',
+        'Candlestick':'Ein Candlestick verdichtet Open, High, Low und Close eines Zeitraums. Körper und Dochte zeigen, wo der Markt innerhalb dieser Periode gehandelt hat.',
+        'Doji':'Ein Doji hat einen sehr kleinen Kerzenkörper, weil Eröffnung und Schluss nahe beieinander liegen. Er signalisiert Unentschlossenheit, aber erst der Kontext entscheidet, ob das relevant ist.',
+        'Hammer':'Ein Hammer besitzt typischerweise einen kleinen Körper und einen langen unteren Docht. Er kann nach einem Abverkauf auf Zurückweisung tieferer Preise hinweisen, ist allein aber kein Kaufsignal.',
+        'Engulfing':'Beim Engulfing umschließt der Körper einer Kerze den Körper der vorherigen Kerze. Das kann einen Stimmungswechsel anzeigen, muss aber in Trend, Volumen und Struktur eingeordnet werden.',
+        'Trend':'Ein Trend ist eine wiederkehrende Folge von Hochs und Tiefs in eine Richtung. Aufwärtstrend: höhere Hochs und höhere Tiefs. Abwärtstrend: tiefere Hochs und tiefere Tiefs.',
+        'Swing':'Swing High und Swing Low sind markante lokale Wendepunkte. Für Elliott sind sie wichtige Anker, weil Hauptwellen an relevanten Wendepunkten enden und nicht an jeder kleinen Kerze.',
+        'Support':'Support ist eine Zone, in der Nachfrage wiederholt stärker wurde. Eine Zone kann gebrochen werden; sie ist kein Versprechen, sondern ein Bereich erhöhter Reaktionswahrscheinlichkeit.',
+        'Widerstand':'Resistance ist eine Zone, in der Angebot wiederholt stärker wurde. Wird sie überzeugend gebrochen, kann sie später als Support wirken.',
+        'Trendlinie':'Eine Trendlinie verbindet relevante Swing-Punkte. Gute Linien werden nicht so lange verschoben, bis sie zum gewünschten Szenario passen.',
+        '5-3':'Das Elliott-Grundmodell unterscheidet fünf Wellen in Trendrichtung und drei Wellen als Korrektur. Dieses Muster ist fraktal und kann auf mehreren Degrees gleichzeitig auftreten.',
+        'Motive':'Motive Waves treiben die Bewegung auf dem betrachteten Degree voran. Der klassische Impuls und die Diagonale gehören zu den motive structures.',
+        'Corrective':'Corrective Waves bewegen sich gegen den Trend des betrachteten Degrees oder seitwärts. Sie sind strukturell vielfältiger und deshalb in Echtzeit meist schwieriger zu zählen.',
+        'Fraktal':'Fraktalität bedeutet, dass eine große Welle aus kleineren Wellen derselben Grundlogik bestehen kann. Dadurch entsteht die verschachtelte Elliott-Struktur über verschiedene Timeframes.',
+        'Degree':'Der Degree bezeichnet die Größenordnung einer Welle. Ein sauberer Count trennt übergeordnete Wellen von ihren Unterwellen und verwendet dafür konsistente Labels.',
+        'Welle 1':'Welle 1 ist der erste mögliche Schub eines neuen Trends. In Echtzeit wirkt sie häufig noch wie eine bloße Gegenbewegung des alten Trends.',
+        'Welle 2':'Welle 2 korrigiert Welle 1. Harte Regel: Sie darf den Start von Welle 1 nicht überschreiten. Wie tief sie zurückläuft, ist dagegen eine Guideline.',
+        'Welle 3':'Welle 3 ist oft dynamisch, muss aber nicht zwingend die längste motive wave sein. Sie darf nur nicht die kürzeste von 1, 3 und 5 sein.',
+        'Welle 4':'Welle 4 korrigiert Welle 3. Im klassischen Impuls darf sie den Preisbereich von Welle 1 nicht überlappen. Diagonalen sind eine Sonderform.',
+        'Welle 5':'Welle 5 beendet den Impuls. Sie kann neues Extrem schaffen, muss es bei einer Truncation aber nicht.',
+        'Alternation':'Alternation ist eine Guideline: Wenn Welle 2 scharf und tief korrigiert, ist Welle 4 häufig seitwärts oder flacher – und umgekehrt. Es ist keine Pflichtregel.',
+        'Equality':'Equality beschreibt häufige Längenbeziehungen, etwa dass Welle 5 ungefähr so lang wie Welle 1 sein kann, wenn Welle 3 stark erweitert war.',
+        'Extension':'Eine Extension ist eine deutlich verlängerte motive wave oder eine Fibonacci-Projektion. Der Begriff muss aus dem Kontext klar werden.',
+        'Leading Diagonal':'Eine Leading Diagonal ist eine motive Sonderform am Beginn einer größeren Bewegung. Überlappungen können zulässig sein, weshalb die klassischen Impulsregeln nicht 1:1 übertragen werden dürfen.',
+        'Ending Diagonal':'Eine Ending Diagonal tritt typischerweise am Ende einer größeren Bewegung auf und kann auf nachlassende Trendqualität hinweisen.',
+        'Truncation':'Truncation bedeutet, dass eine fünfte Welle das Ende der dritten Welle nicht übertrifft. Weil das selten ist, sollte immer ein Alternativcount geprüft werden.',
+        'Zigzag':'Ein Zigzag ist typischerweise eine 5-3-5-Korrektur. A und C sind motive Fünfer, B ist eine korrektive Dreierstruktur.',
+        'Flat':'Ein Flat ist typischerweise 3-3-5 aufgebaut. Besonders die B-Welle kann weit zurücklaufen und beim Expanded Flat sogar den Start von A überschreiten.',
+        'Triangle':'Ein Elliott-Triangle besteht aus A-B-C-D-E und ist korrektiv. Die Teilbewegungen überlappen sich häufig und die Spanne kann sich verengen.',
+        'W-X-Y':'W-X-Y verbindet zwei korrektive Muster über eine X-Welle. Es ist eine Kombination, keine Bezeichnung für jede unklare Seitwärtsphase.',
+        'Fibonacci':'Die Fibonacci-Folge lautet 0, 1, 1, 2, 3, 5, 8, 13 usw. Jede Zahl ist die Summe der beiden vorherigen. Aus Zahlenverhältnissen entstehen die in Charts verwendeten Prozentmarken.',
+        'Retracement':'Ein Retracement misst, wie viel einer vorherigen Bewegung zurückgenommen wurde. 38,2 %, 50 % oder 61,8 % sind mögliche Reaktionszonen, keine garantierten Wendepunkte.',
+        '23,6':'23,6 % ist ein flaches Retracement. Es tritt eher bei sehr starken Trends oder frühen, kurzen Gegenbewegungen auf, ist aber nicht automatisch bedeutend.',
+        '38,2':'38,2 % ist ein häufig beobachteter Retracement-Bereich, zum Beispiel bei flacheren Welle-4-Korrekturen. Es bleibt eine Guideline.',
+        '50 Prozent':'50 % ist kein originäres Fibonacci-Verhältnis, wird in der Praxis aber häufig zusammen mit Fibonacci-Leveln verwendet, weil Halbierungen psychologisch und technisch oft beachtet werden.',
+        '61,8':'61,8 % ist das bekannteste Fibonacci-Verhältnis. Es darf niemals als Pflichtziel oder sichere Wendemarke behandelt werden.',
+        '78,6':'78,6 % ist ein tiefes Retracement. Wird eine Struktur so tief korrigiert, muss besonders sorgfältig geprüft werden, ob der ursprüngliche Count noch plausibel ist.',
+        '100 Prozent':'100 % bedeutet Gleichheit der gemessenen Strecke. Bei Projektionen kann das bedeuten, dass zwei Wellen ungefähr gleich lang sind.',
+        '123,6':'123,6 % projiziert eine Bewegung leicht über ihre Ausgangslänge hinaus und dient als mögliche Zielmarke in bestimmten Strukturen.',
+        '138,2':'138,2 % ist eine weitere Projektionsmarke. Sie ist kein Elliott-Gesetz, sondern eine mögliche mathematische Zielzone.',
+        '161,8':'161,8 % ist eine häufig verwendete Extension, besonders bei starken Welle-3- oder C-Bewegungen. Häufig bedeutet nicht zwingend.',
+        '200 Prozent':'200 % entspricht der doppelten Länge der Ausgangsbewegung. In sehr starken Bewegungen kann dieser Bereich als Projektion relevant werden.',
+        '261,8':'261,8 % ist eine weitreichende Extension für außergewöhnlich starke Bewegungen. Sie sollte nicht ohne Struktur- und Kontextprüfung verwendet werden.',
+        'Volumen':'Volumen misst Handelsaktivität. Es kann zeigen, ob viele Marktteilnehmer an einer Bewegung beteiligt sind, ist aber keine harte Elliott-Regel.',
+        'RSI':'Der RSI misst Momentum auf einer Skala von 0 bis 100. Überkauft und überverkauft sind Zustandsbeschreibungen, keine automatischen Umkehrsignale.',
+        'Divergenz':'Bei einer Divergenz bestätigt Momentum das neue Preisextrem nicht. Das kann auf nachlassende Dynamik hinweisen, etwa in einer späten Welle 5.',
+        'MACD':'Der MACD leitet Momentum aus gleitenden Durchschnitten ab. Er kann Beschleunigung, Abschwächung und Divergenzen sichtbar machen.',
+        'SMA':'Der Simple Moving Average bildet den Durchschnitt einer festen Anzahl vergangener Kurse. Er glättet den Preis, reagiert aber verzögert.',
+        'EMA':'Der Exponential Moving Average gewichtet jüngere Kurse stärker und reagiert dadurch meist schneller als ein SMA gleicher Länge.',
+        'Timeframes':'Multi-Timeframe-Analyse beginnt groß und wird kleiner. Erst die übergeordnete Struktur bestimmen, dann Unterwellen im kleineren Chart suchen.',
+        'Primary Count':'Der Primary Count ist das bevorzugte gültige Szenario, nicht die sichere Zukunft. Er braucht Regeln, Struktur, Invalidierung und einen plausiblen Alternativcount.',
+        'Alternate Count':'Der Alternate Count ist eine ebenfalls regelkonforme Erklärung des Charts. Er schützt davor, sich emotional an nur ein Szenario zu binden.',
+        'Invalidierung':'Invalidierung beantwortet, welches Preisereignis einen Count objektiv ungültig macht. Ohne Invalidierung fehlt ein klares Kriterium zum Verwerfen des Szenarios.',
+        'Umsatz':'Umsatz ist der Wert der verkauften Leistungen eines Unternehmens. Er ist nicht dasselbe wie Gewinn, weil Kosten erst noch abgezogen werden.',
+        'Gewinn':'Gewinn ist der Überschuss nach Kosten. Seine Qualität hängt unter anderem davon ab, ob er nachhaltig, cashflow-stark und frei von Sondereffekten ist.',
+        'Marge':'Eine Marge setzt Ergebnisgrößen ins Verhältnis zum Umsatz und hilft zu beurteilen, wie profitabel ein Geschäftsmodell arbeitet.',
+        'Cashflow':'Cashflow betrachtet reale Geldzuflüsse und -abflüsse. Er ergänzt die Gewinnrechnung, weil bilanzielle Gewinne nicht automatisch gleich Cash sind.',
+        'Verschuldung':'Verschuldung ist nur im Verhältnis zu Cashflow, Zinsen, Laufzeiten und Geschäftsmodell sinnvoll zu bewerten.',
+        'KGV':'Das Kurs-Gewinn-Verhältnis setzt Preis beziehungsweise Marktkapitalisierung ins Verhältnis zum Gewinn. Ein niedriges KGV ist nicht automatisch günstig, ein hohes nicht automatisch teuer.',
+        'Guidance':'Guidance ist der Ausblick des Managements. Sie ist eine Erwartung und kann später angehoben, bestätigt oder gesenkt werden.',
+        'Primärquellen':'Primärquellen sind Originalquellen wie Investor-Relations-Seiten, Geschäftsberichte, SEC EDGAR oder offizielle Register. Aggregatoren sind bequem, aber wichtige Zahlen sollten dort verifiziert werden.',
+        'Workflow':'Ein sauberer Analyse-Workflow folgt immer derselben Reihenfolge: großer Timeframe, Trend, Swings, möglicher Count, Regeln, Fibonacci, Alternativen, Invalidierung, Bestätigungen, Fundamentaldaten und erst dann Fazit.',
+        'Historische Charts':'Historische Charts ohne sichtbare Zukunft verhindern Hindsight Bias. Entscheide zuerst mit den damals verfügbaren Daten und blende erst danach weitere Kerzen ein.'
+      };
+      function lookupDetail(title,focus){const key=Object.keys(detailByKeyword).find(k=>title.includes(k));return key?detailByKeyword[key]:`In dieser Lektion lernst du ${title.toLowerCase()}. Der Schwerpunkt liegt darauf, ${focus}. Arbeite immer vom beobachtbaren Preisverhalten zur Interpretation und trenne harte Regeln von häufigen Guidelines.`}
+      function makeExample(title,moduleIndex,lessonIndex){
+        if(title.includes('Welle 2')) return 'Beispiel: Welle 1 läuft von 100 € auf 120 €. Eine mögliche Welle 2 darf 100 € nicht unterschreiten. Fällt der Kurs auf 99 €, ist genau dieser Impulscount invalidiert.';
+        if(title.includes('Welle 3')) return 'Beispiel: Welle 1 misst 20 Punkte, Welle 3 misst 32 Punkte und Welle 5 misst 24 Punkte. Welle 3 ist nicht die kürzeste und kann daher regelkonform sein.';
+        if(title.includes('Welle 4')) return 'Beispiel: Endet Welle 1 bei 120 €, darf eine klassische Welle 4 im Aufwärtsimpuls nicht unter 120 € fallen. Bei einer Diagonale gelten andere Überlappungsregeln.';
+        if(title.includes('Retracement')) return 'Beispiel: 100 € → 200 € entspricht 100 € Aufwärtsbewegung. Ein Rücklauf auf 150 € nimmt 50 € zurück, also 50 % der vorherigen Bewegung.';
+        if(title.includes('161,8')) return 'Beispiel: Eine Referenzwelle ist 20 Punkte lang. 161,8 % davon sind 32,36 Punkte. Dieser Wert ist eine Projektion, kein garantierter Endpunkt.';
+        if(title.includes('Zigzag')) return 'Beispiel: Nach einem Anstieg fällt A in fünf Teilwellen, B erholt sich in drei, C fällt erneut in fünf. Das entspricht der typischen 5-3-5-Struktur.';
+        if(title.includes('Flat')) return 'Beispiel: A korrigiert dreiteilig, B läuft ebenfalls dreiteilig weit zurück, C beendet die Korrektur fünfteilig. Beim Expanded Flat kann B sogar über den Start von A hinausgehen.';
+        if(title.includes('Triangle')) return 'Beispiel: Der Kurs bildet fünf überlappende Segmente A-B-C-D-E, während Hochs und Tiefs zunehmend zusammenrücken. Danach folgt häufig noch ein letzter Schub der größeren Struktur.';
+        if(title.includes('RSI')) return 'Beispiel: Der Kurs erreicht ein neues Hoch, der RSI bleibt jedoch unter seinem vorherigen Hoch. Das kann eine bearishe Divergenz sein, aber noch kein automatisches Verkaufssignal.';
+        if(title.includes('KGV')) return 'Beispiel: Zwei Unternehmen haben KGV 10 und KGV 30. Ohne Wachstum, Verschuldung, Qualität und Zyklik zu kennen, lässt sich daraus allein keine Kaufentscheidung ableiten.';
+        return `Beispiel: Öffne einen sauberen Chart, markiere nur die für „${title}“ relevanten Punkte und erkläre zuerst, was objektiv sichtbar ist. Erst danach ordnest du die Beobachtung in ${fullModules[moduleIndex].name} ein.`;
+      }
+      function makeWarning(title){
+        if(title.includes('Regel')) return 'Typischer Fehler: Eine Guideline wie ein häufiges Fibonacci-Verhältnis als zwingende Elliott-Regel behandeln.';
+        if(title.includes('Fibonacci')||title.includes('Prozent')||title.includes('Retracement')||title.includes('Extension')) return 'Typischer Fehler: Ein Fibonacci-Level als magische Umkehrmarke oder garantiertes Kursziel behandeln.';
+        if(title.includes('Candlestick')||title.includes('Doji')||title.includes('Hammer')||title.includes('Engulfing')) return 'Typischer Fehler: Eine einzelne Kerze ohne Trend, Support/Resistance und übergeordnete Struktur zu handeln.';
+        if(title.includes('Count')||title.includes('Invalidierung')) return 'Typischer Fehler: Den Count nachträglich so lange umzubeschriften, bis die eigene Marktmeinung wieder passt.';
+        return `Typischer Fehler: „${title}“ isoliert betrachten und den übergeordneten Kontext oder Gegenargumente ignorieren.`;
+      }
+      function makeQuiz(title,topic){
+        if(title.includes('Regel oder Guideline')) return ['Was unterscheidet eine Regel von einer Guideline?','Eine Regel darf in der betreffenden Struktur nicht verletzt werden; eine Guideline beschreibt nur ein häufiges Verhalten.'];
+        if(title.includes('Retracement')) return ['Was misst ein Retracement?','Wie viel der vorherigen Bewegung zurückgenommen wurde.'];
+        if(title.includes('Extension')) return ['Wofür wird eine Extension verwendet?','Zur Projektion möglicher Zielbereiche über eine Referenzbewegung hinaus.'];
+        if(title.includes('Primary Count')) return ['Was ist ein Primary Count?','Das aktuell bevorzugte, regelkonforme Szenario – keine sichere Vorhersage.'];
+        if(title.includes('Invalidierung')) return ['Warum braucht jeder Elliott-Count ein Invalidationsniveau?','Damit objektiv feststeht, wann dieser konkrete Count nicht mehr gültig sein kann.'];
+        return [`Was ist die wichtigste Aussage der Lektion „${title}“?`,`Du sollst ${title.toLowerCase()} korrekt erklären, im passenden Kontext erkennen und dabei Regeln, Guidelines und Wahrscheinlichkeiten sauber trennen.`];
+      }
+      function buildFullLessons(){const out=[];let id=1;fullModules.forEach((m,mi)=>m.titles.forEach((title,li)=>{const qa=makeQuiz(title,m.topic);out.push({title:`${id} · ${title}`,topic:m.topic,text:lookupDetail(title,m.focus),example:makeExample(title,mi,li),remember:`Merksatz: ${title} gehört zum Baustein „${m.name}“. Erst verstehen, dann im Chart erkennen, danach mit anderen Hinweisen verbinden.`,warning:makeWarning(title),quiz:qa[0],answer:qa[1]});id++}));return out}
+      lessonData.splice(0,lessonData.length,...buildFullLessons());
+      const lessonSelect=root.querySelector('#lessonSelect');
+      const lessonContent=root.querySelector('#lessonContent');
+      lessonData.forEach((l,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=l.title;lessonSelect.appendChild(o)});
+      function renderLesson(index){const i=Math.max(0,Math.min(lessonData.length-1,Number(index)||0));lessonSelect.value=String(i);const l=lessonData[i];lessonContent.innerHTML=`<span class="pill">${l.topic}</span><h2 style="margin-top:10px">${l.title}</h2><p>${l.text}</p><div class="example"><strong>Beispiel</strong><br>${l.example}</div><div class="remember"><strong>Merksatz</strong><br>${l.remember}</div><div class="warning"><strong>Typischer Fehler</strong><br>${l.warning}</div><h3>Mini-Quiz</h3><p><strong>${l.quiz}</strong></p><button class="btn secondary lessonAnswer">Antwort anzeigen</button><div class="lessonAnswerText banner hidden" style="margin-top:10px"><strong>Antwort:</strong> ${l.answer}</div>`;const b=lessonContent.querySelector('.lessonAnswer');const a=lessonContent.querySelector('.lessonAnswerText');b.addEventListener('click',()=>a.classList.remove('hidden'))}
+      root.querySelector('#openLesson').addEventListener('click',()=>renderLesson(lessonSelect.value));
+      root.querySelector('#prevLesson').addEventListener('click',()=>renderLesson(Number(lessonSelect.value)-1));
+      root.querySelector('#nextLesson').addEventListener('click',()=>renderLesson(Number(lessonSelect.value)+1));
+      renderLesson(0);
+
+      root.querySelector('#createReminder').addEventListener('click',()=>{
+        const value=root.querySelector('#reminderTime').value||'20:00';
+        const parts=value.split(':');
+        const hh=String(Math.max(0,Math.min(23,Number(parts[0])||20))).padStart(2,'0');
+        const mm=String(Math.max(0,Math.min(59,Number(parts[1])||0))).padStart(2,'0');
+        const now=new Date();
+        const y=now.getFullYear(), m=String(now.getMonth()+1).padStart(2,'0'), d=String(now.getDate()).padStart(2,'0');
+        const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Elliott Wave Academy//DE','BEGIN:VEVENT',`DTSTART:${y}${m}${d}T${hh}${mm}00`,`RRULE:FREQ=DAILY`,'SUMMARY:Elliott Wave Academy – Lernzeit','DESCRIPTION:Wiederhole die Übungen vom Vortag und absolviere die heutige Lektion.','BEGIN:VALARM','TRIGGER:-PT0M','ACTION:DISPLAY','DESCRIPTION:Elliott Wave Academy – jetzt üben','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+        const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');a.href=url;a.download='elliott-wave-taeglich.ics';a.click();
+        setTimeout(()=>URL.revokeObjectURL(url),1000);
+        root.querySelector('#reminderStatus').innerHTML=`<strong>Erstellt:</strong> tägliche Erinnerung um ${hh}:${mm} Uhr. Öffne die heruntergeladene Kalenderdatei auf deinem Samsung und speichere den Termin.`;
+      });
+    })();
+  </script>
 </div>
-
-<nav class="bottom"><div class="bottom-inner">
-<button class="tab active" data-screen="home"><b>🏠</b>Heute</button>
-<button class="tab" data-screen="routine"><b>🔁</b>Routine</button>
-<button class="tab" data-screen="about"><b>ℹ️</b>Info</button>
-</div></nav>
-
 <script>
-const lessons=[
-{title:"1. Was ist ein Kurs?",icon:"🧸",steps:[
-["story","Stell dir einen Teddy vor","🧸","Ein Teddy kostet heute 10 €. Morgen kostet er 12 €. Sein Preis hat sich verändert."],
-["example","Was bedeutet das?","⬆️","Der Preis von etwas kann steigen oder fallen. Bei Aktien nennt man diesen Preis oft Kurs."],
-["term","Der neue Begriff","🏷️","Kurs = der aktuelle Preis einer Aktie oder eines anderen gehandelten Gegenstands."],
-["quiz","Mini-Frage","❓","Was ist ein Kurs?","Der aktuelle Preis","Eine geheime Börsenregel","0"]
-]},
-{title:"2. Was ist ein Chart?",icon:"📈",steps:[
-["story","Ein Bild erzählt eine Geschichte","🖍️","Wenn wir jeden Tag den Teddy-Preis aufmalen, sehen wir: hoch, runter, hoch."],
-["example","Wie eine Wachstumslinie","📏","So wie man an der Wand markiert, wie groß ein Kind wird, zeigt ein Chart, wie sich ein Preis verändert."],
-["term","Der neue Begriff","📊","Chart = eine Zeichnung, die zeigt, wie sich ein Preis mit der Zeit bewegt."],
-["quiz","Mini-Frage","❓","Was zeigt ein Chart?","Wie sich ein Preis verändert","Wie laut die Börse ist","0"]
-]},
-{title:"3. Was ist eine Welle?",icon:"🌊",steps:[
-["story","Wie eine Schaukel","🎠","Eine Schaukel geht hoch, dann runter, dann wieder hoch. Preise bewegen sich oft ähnlich."],
-["example","Nicht geradeaus","⛰️","Beim Bergsteigen gehst du hoch, machst Pause oder gehst kurz zurück und gehst weiter."],
-["term","Der neue Begriff","🌊","Welle = ein Abschnitt einer Preisbewegung nach oben oder unten."],
-["quiz","Mini-Frage","❓","Warum heißt es Welle?","Weil Preise oft hoch und runter laufen","Weil Aktien im Meer schwimmen","0"]
-]},
-{title:"4. Elliott: 1–2–3–4–5",icon:"🖐️",steps:[
-["story","Fünf kleine Schritte","👣","Elliott beschreibt eine typische Bewegung oft als fünf Teile: vor, etwas zurück, weiter vor, Pause, noch einmal vor."],
-["example","Wie Bergsteigen","🧗","1 hoch, 2 etwas zurück, 3 weiter hoch, 4 Pause, 5 letzter Schub."],
-["term","Der neue Begriff","🔢","Impuls = eine typische fünfteilige Bewegung in Richtung des größeren Trends."],
-["quiz","Mini-Frage","❓","Wie viele Teile hat ein typischer Elliott-Impuls?","5","3","0"]
-]},
-{title:"5. Was ist eine Korrektur?",icon:"↩️",steps:[
-["story","Nach vorne kommt oft zurück","🚶","Nach mehreren Schritten nach vorne gehst du manchmal ein Stück zurück."],
-["example","A–B–C","🔤","Elliott beschreibt Gegenbewegungen häufig mit A, B und C."],
-["term","Der neue Begriff","↩️","Korrektur = eine Bewegung gegen die vorherige größere Bewegung."],
-["quiz","Mini-Frage","❓","Was ist eine Korrektur?","Eine Gegenbewegung","Eine Garantie für fallende Kurse","0"]
-]},
-{title:"6. Retracement kinderleicht",icon:"🍦",steps:[
-["story","Der Weg zur Eisdiele","🍦","Du gehst 100 Meter vorwärts. Dann gehst du 30 Meter zurück. Du bist nicht wieder am Start, sondern nur ein Stück zurück."],
-["example","Genau das meint das Wort","↩️","Ein Teil des vorherigen Weges wird zurückgenommen."],
-["term","Der neue Begriff","📐","Retracement = ein teilweises Zurücklaufen der vorherigen Preisbewegung."],
-["quiz","Mini-Frage","❓","Was bedeutet Retracement?","Ein Stück des vorherigen Weges zurück","Immer ganz zurück zum Start","0"]
-]},
-{title:"7. Fibonacci ohne Zauberei",icon:"🐇",steps:[
-["story","Eine besondere Zahlenfolge","🔢","1, 1, 2, 3, 5, 8, 13 ... Jede neue Zahl entsteht aus den zwei Zahlen davor."],
-["example","Daraus entstehen Verhältnisse","🧩","Trader beobachten oft Marken wie 38,2 % oder 61,8 %. Sie rechnen damit mögliche Rücklaufzonen aus."],
-["term","Ganz wichtig","⚠️","Fibonacci-Marken sind Rechenhilfen. Sie sagen nicht sicher voraus, wo ein Kurs drehen wird."],
-["quiz","Mini-Frage","❓","Sind Fibonacci-Marken sichere Vorhersagen?","Nein","Ja, immer","0"]
-]}];
-
-let state=JSON.parse(localStorage.getItem("ww-state")||'{"done":[],"last":null}');
-let current=0,step=0;
-
-function save(){localStorage.setItem("ww-state",JSON.stringify(state));renderHome()}
-function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.screen===id))}
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>show(t.dataset.screen));
-
-function renderHome(){
- const list=document.getElementById("lessonList"); list.innerHTML="";
- lessons.forEach((l,i)=>{
-  const done=state.done.includes(i);
-  const div=document.createElement("div");div.className="lesson-card";
-  div.innerHTML=`<div class="icon">${l.icon}</div><div><h3>${l.title}</h3><p>ca. 10 Minuten · Bild → Beispiel → Begriff → Frage</p></div><div class="status">${done?"✅ Fertig":"Start"}</div>`;
-  div.onclick=()=>openLesson(i); list.appendChild(div);
- });
- const n=state.done.length; document.getElementById("overallBar").style.width=(n/lessons.length*100)+"%";
- document.getElementById("progressText").textContent=`${n} von ${lessons.length} Lektionen geschafft`;
- document.getElementById("streak").textContent=n+" Lektionen gelernt";
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
 }
-function openLesson(i){current=i;step=0;document.getElementById("lessonTitle").textContent=lessons[i].title;renderSteps();show("learn")}
-function renderSteps(){
- const s=lessons[current].steps; const box=document.getElementById("steps"); box.innerHTML="";
- s.forEach((x,i)=>{
-  const d=document.createElement("div");d.className="step"+(i===step?" active":"");
-  if(x[0]==="quiz"){
-   d.innerHTML=`<div class="big-emoji">${x[2]}</div><h2>${x[1]}</h2><p><b>${x[3]}</b></p>
-   <label class="qopt"><input type="radio" name="quiz" value="0"> ${x[4]}</label>
-   <label class="qopt"><input type="radio" name="quiz" value="1"> ${x[5]}</label>
-   <div class="feedback" id="fb"></div>`;
-  } else {
-   d.innerHTML=`<div class="big-emoji">${x[2]}</div><h2>${x[1]}</h2><div class="${x[0]==="term"?"term":"example"}">${x[3]}</div>`;
-  }
-  box.appendChild(d);
- });
- document.getElementById("lessonBar").style.width=((step+1)/s.length*100)+"%";
- document.getElementById("prevStep").style.visibility=step===0?"hidden":"visible";
- document.getElementById("nextStep").textContent=step===s.length-1?"Fertig":"Weiter";
-}
-document.getElementById("nextStep").onclick=()=>{
- const s=lessons[current].steps;
- if(step===s.length-1){
-   const q=document.querySelector('input[name="quiz"]:checked'); const fb=document.getElementById("fb");
-   if(!q){fb.className="feedback show bad";fb.textContent="Wähle zuerst eine Antwort.";return}
-   if(q.value!==s[step][6]){fb.className="feedback show bad";fb.textContent="Fast. Schau dir die Lektion noch einmal kurz an.";return}
-   fb.className="feedback show ok";fb.textContent="Richtig! Lektion geschafft.";
-   if(!state.done.includes(current))state.done.push(current);state.last=current;save();
-   setTimeout(()=>show("home"),700); return;
- }
- step++;renderSteps();
-}
-document.getElementById("prevStep").onclick=()=>{if(step>0){step--;renderSteps()}};
-document.getElementById("backBtn").onclick=()=>show("home");
-document.getElementById("continueBtn").onclick=()=>{
- let next=lessons.findIndex((_,i)=>!state.done.includes(i)); if(next<0)next=0;openLesson(next)
-};
-document.getElementById("reviewBtn").onclick=()=>openLesson(state.last ?? 0);
-
-renderHome();
-
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js"))}
 </script>
 </body>
 </html>

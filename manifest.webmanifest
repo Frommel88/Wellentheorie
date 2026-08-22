@@ -1,29 +1,25 @@
 {
-  "name": "WellenWelt",
-  "short_name": "WellenWelt",
-  "start_url": "./index.html",
+  "name": "Elliott Wave Academy",
+  "short_name": "Elliott-Wellen",
+  "description": "240 Lektionen zu Elliott-Wellen, Fibonacci, Charttechnik und Fundamentalanalyse.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#fff8eb",
-  "theme_color": "#fff8eb",
-  "description": "Elliott-Wellen und Fibonacci kinderleicht lernen",
+  "background_color": "#0f1115",
+  "theme_color": "#111318",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ]
 }
