@@ -1,7 +1,7 @@
 {
   "name": "Elliott Wave Academy",
   "short_name": "Elliott-Wellen",
-  "description": "240 Lektionen zu Elliott-Wellen, Fibonacci, Charttechnik und Fundamentalanalyse.",
+  "description": "240 Lektionen mit Lerninhalten, Quiz, Übungen und Fortschritt.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

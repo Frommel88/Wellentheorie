@@ -1,15 +1,18 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#111318">
-  <meta name="description" content="Elliott Wave Academy – 240 Lektionen zu Elliott-Wellen, Fibonacci, Charttechnik und Fundamentalanalyse.">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <title>Elliott Wave Academy</title>
-  <style>html,body{margin:0;padding:0;min-height:100%;background:#0f1115}body{min-width:0}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111318">
+<meta name="description" content="Elliott Wave Academy – 240 Lektionen mit Lerninhalten, Quiz, Übungen und Fortschritt.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Elliott Wave Academy</title>
+<style>
+html,body{margin:0;min-height:100%;background:#0f1115}
+body{min-width:0}
+</style>
 </head>
 <body>
 <div id="ewa" style="min-height:100%;background:light-dark(#f7f8fb,#0f1115);color:light-dark(#16181d,#f4f5f7);font-family:Inter,system-ui,sans-serif;padding:20px;box-sizing:border-box">
@@ -79,11 +82,16 @@
     #ewa .daystep strong{display:block;margin-bottom:5px}
     #ewa .curriculum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
     #ewa .module{border:1px solid light-dark(#e0e4ea,#303640);border-radius:14px;padding:12px}
-    #ewa .moduleLesson{display:block;width:100%;text-align:left;border:0;border-top:1px solid light-dark(#eceef2,#292e36);background:transparent;color:inherit;padding:10px 0;cursor:pointer}
+    #ewa .moduleLesson{display:block;width:100%;text-align:left;border:0;border-top:1px solid light-dark(#eceef2,#292e36);background:transparent;color:inherit;padding:10px 0;cursor:pointer;position:relative}
     #ewa .moduleLesson:first-of-type{border-top:0}
     #ewa .moduleLesson strong{display:block}
-    #ewa .lessonHero{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:center;margin:12px 0}
-    #ewa .lessonHero svg{width:100%;height:auto;display:block}
+    #ewa .moduleLesson.done{background:rgba(66,163,106,.10);border-radius:10px;padding-left:10px;padding-right:10px}
+    #ewa .moduleLesson.done strong{color:#2f8a57}
+    #ewa .moduleLesson.done:after{content:'✓';position:absolute;right:8px;top:12px;color:#2f8a57;font-weight:900}
+    #ewa .lessonHero{display:block;margin:12px 0}
+    #ewa .lessonHero .visual{margin-bottom:16px;padding:14px}
+    #ewa .lessonHero .visual svg{width:100%;height:auto;display:block;aspect-ratio:16/9;max-height:none}
+    #ewa .lessonHero .lessonText{display:block;max-width:780px}
     #ewa .review{border-left:4px solid #8b5cf6;padding-left:12px}
     #ewa .reminderRow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-top:12px}
     #ewa .lessonBrowser{margin-top:14px}
@@ -95,6 +103,13 @@
     #ewa .lessonContent .example{border-left:4px solid #6c7af7;padding:10px 12px;margin:12px 0;background:rgba(108,122,247,.08);border-radius:8px}
     #ewa .lessonContent .remember{border-left:4px solid #42a36a;padding:10px 12px;margin:12px 0;background:rgba(66,163,106,.08);border-radius:8px}
     #ewa .lessonContent .warning{border-left:4px solid #e28b4e;padding:10px 12px;margin:12px 0;background:rgba(226,139,78,.08);border-radius:8px}
+    #ewa .lessonQuiz{margin-top:18px;padding-top:14px;border-top:1px solid light-dark(#e2e6ec,#2c323c)}
+    #ewa .lessonQuiz .quizQuestion{margin:14px 0}
+    #ewa .lessonQuiz .quizQuestion>strong{display:block;margin-bottom:8px}
+    #ewa .lessonQuiz .quizFeedback{margin-top:8px}
+    #ewa .lessonCompleteRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+    #ewa .btn.success{background:#2f8a57;color:#fff;font-weight:800}
+    #ewa .lessonQuizStatus{margin-top:12px}
     @media(max-width:780px){#ewa{padding:12px}#ewa .hero,#ewa .grid,#ewa .grid2,#ewa .calcrow,#ewa .visualgrid,#ewa .rulebox,#ewa .dayplan,#ewa .curriculum,#ewa .reminderRow{grid-template-columns:1fr}#ewa h1{font-size:34px}}
   </style>
 
@@ -668,9 +683,26 @@
         if(t==='Fundamentalanalyse') return '<svg viewBox="0 0 320 180"><g fill="#6c7af7"><rect x="45" y="105" width="45" height="50"/><rect x="125" y="75" width="45" height="80"/><rect x="205" y="45" width="45" height="110"/></g></svg>';
         return '<svg viewBox="0 0 320 180"><path d="M25 150 H300 M35 160 V25" stroke="currentColor" opacity=".18"/><polyline points="40,140 90,118 130,130 180,75 225,95 292,45" fill="none" stroke="#6c7af7" stroke-width="6"/></svg>';
       }
-      function renderLesson(index){const i=Math.max(0,Math.min(lessonData.length-1,Number(index)||0));lessonSelect.value=String(i);const l=lessonData[i];lessonContent.innerHTML=`<span class="pill">${l.topic}</span><h2 style="margin-top:10px">${l.title}</h2><div class="lessonHero"><div><h3>Erklärung</h3><p>${l.text}</p><div class="example"><strong>Konkretes Beispiel</strong><br>${l.example}</div></div><div class="visual">${lessonVisual(l)}</div></div><h3>Schritt für Schritt</h3><ul>${l.steps.map(s=>`<li>${s}</li>`).join('')}</ul><div class="example"><strong>Eigene Übung</strong><br>${l.practice}</div><div class="remember"><strong>Merksatz</strong><br>${l.remember}</div><div class="warning"><strong>Typischer Fehler</strong><br>${l.warning}</div><h3>Selbstkontrolle</h3><p class="muted">Bevor du die Antwort öffnest, erkläre das Thema laut in eigenen Worten. Wenn du stockst, lies Erklärung und Beispiel noch einmal.</p><h3>Mini-Quiz</h3><p><strong>${l.quiz}</strong></p><button class="btn secondary lessonAnswer">Antwort anzeigen</button><div class="lessonAnswerText banner hidden" style="margin-top:10px"><strong>Antwort:</strong> ${l.answer}</div>`;lessonContent.scrollIntoView({behavior:'smooth',block:'start'});const b=lessonContent.querySelector('.lessonAnswer');const a=lessonContent.querySelector('.lessonAnswerText');b.addEventListener('click',()=>a.classList.remove('hidden'))}
+      const completedLessons=new Set(JSON.parse(localStorage.getItem('ewaCompletedLessons')||'[]'));
+      function makeQuizItems(l,i){
+        const pool=[
+          {q:l.quiz,options:[l.answer,'Eine sichere Kursprognose','Eine Aussage ohne Kontext','Eine feste Fibonacci-Pflicht'],correct:0},
+          {q:'Was ist bei dieser Lektion am wichtigsten?',options:['Kontext, Regeln und Wahrscheinlichkeiten sauber zu trennen','Nur das Bild auswendig zu lernen','Immer denselben Count beizubehalten','Ein einzelnes Signal als Beweis zu behandeln'],correct:0},
+          {q:'Welche Aussage passt zur sauberen Analyse?',options:['Beobachtung zuerst, Interpretation danach','Prognose zuerst, Daten danach','Jede Linie ist eine harte Regel','Ein Level garantiert eine Wende'],correct:0}
+        ];
+        const rot=i%3;return [pool[rot],pool[(rot+1)%3],pool[(rot+2)%3]];
+      }
+      function refreshCompletedStyles(){root.querySelectorAll('.moduleLesson').forEach(btn=>btn.classList.toggle('done',completedLessons.has(Number(btn.dataset.lessonIndex))))}
+      function renderLesson(index){const i=Math.max(0,Math.min(lessonData.length-1,Number(index)||0));lessonSelect.value=String(i);const l=lessonData[i];const quizItems=makeQuizItems(l,i);lessonContent.innerHTML=`<span class="pill">${l.topic}</span><h2 style="margin-top:10px">${l.title}</h2><div class="lessonHero"><div class="visual">${lessonVisual(l)}</div><div class="lessonText"><h3>Erklärung</h3><p>${l.text}</p><div class="example"><strong>Konkretes Beispiel</strong><br>${l.example}</div></div></div><h3>Schritt für Schritt</h3><ul>${l.steps.map(s=>`<li>${s}</li>`).join('')}</ul><div class="example"><strong>Eigene Übung</strong><br>${l.practice}</div><div class="remember"><strong>Merksatz</strong><br>${l.remember}</div><div class="warning"><strong>Typischer Fehler</strong><br>${l.warning}</div><h3>Selbstkontrolle</h3><p class="muted">Bevor du das Quiz startest, erkläre das Thema laut in eigenen Worten. Wenn du stockst, lies Erklärung und Beispiel noch einmal.</p><div class="lessonQuiz"><h3>Quiz zur Lektion</h3>${quizItems.map((q,qi)=>`<div class="quizQuestion" data-q="${qi}"><strong>${qi+1}. ${q.q}</strong>${q.options.map((o,oi)=>`<button class="choice lessonQuizChoice" data-q="${qi}" data-choice="${oi}" data-correct="${oi===q.correct?'true':'false'}">${o}</button>`).join('')}<div class="quizFeedback banner hidden"></div></div>`).join('')}<div class="lessonQuizStatus banner">Beantworte alle drei Fragen richtig. Dann kannst du die Lektion abschließen.</div><div class="lessonCompleteRow"><button class="btn success completeLesson hidden">Lektion abschließen</button><button class="btn secondary backToOverview">Zur Lektionsübersicht</button></div></div>`;lessonContent.scrollIntoView({behavior:'smooth',block:'start'});
+        const answered=new Map();
+        lessonContent.querySelectorAll('.lessonQuizChoice').forEach(btn=>btn.addEventListener('click',()=>{const qi=Number(btn.dataset.q);const group=lessonContent.querySelector(`.quizQuestion[data-q="${qi}"]`);group.querySelectorAll('.lessonQuizChoice').forEach(x=>x.classList.remove('good','bad'));const ok=btn.dataset.correct==='true';btn.classList.add(ok?'good':'bad');const fb=group.querySelector('.quizFeedback');fb.classList.remove('hidden');fb.innerHTML=ok?'<strong>Richtig.</strong>':'<strong>Noch nicht.</strong> Lies den betreffenden Abschnitt noch einmal und versuche es erneut.';answered.set(qi,ok);const all=[0,1,2].every(n=>answered.get(n)===true);lessonContent.querySelector('.completeLesson').classList.toggle('hidden',!all);lessonContent.querySelector('.lessonQuizStatus').innerHTML=all?'<strong>Geschafft.</strong> Alle drei Fragen sind richtig. Du kannst die Lektion jetzt abschließen.':'Beantworte alle drei Fragen richtig. Dann kannst du die Lektion abschließen.';}));
+        const completeBtn=lessonContent.querySelector('.completeLesson');if(completedLessons.has(i)){completeBtn.classList.remove('hidden');completeBtn.textContent='Lektion abgeschlossen ✓';completeBtn.disabled=true;lessonContent.querySelector('.lessonQuizStatus').innerHTML='<strong>Bereits abgeschlossen.</strong> Diese Lektion ist in der Übersicht grün markiert.'}
+        completeBtn.addEventListener('click',()=>{completedLessons.add(i);localStorage.setItem('ewaCompletedLessons',JSON.stringify([...completedLessons]));completeBtn.textContent='Lektion abgeschlossen ✓';completeBtn.disabled=true;lessonContent.querySelector('.lessonQuizStatus').innerHTML='<strong>Lektion abgeschlossen.</strong> Sie ist jetzt in der Übersicht grün markiert.';refreshCompletedStyles()});
+        lessonContent.querySelector('.backToOverview').addEventListener('click',()=>{root.querySelector('.curriculum').scrollIntoView({behavior:'smooth',block:'start'})});
+      }
       root.querySelectorAll('.moduleLessons').forEach(box=>{const moduleIndex=Number(box.dataset.module);const start=moduleIndex*10;const slice=lessonData.slice(start,start+10);box.innerHTML=slice.map((l,offset)=>`<button class="moduleLesson" data-lesson-index="${start+offset}"><strong>${l.title}</strong><span class="muted tiny">Antippen, um Lerninhalt, Bild, Beispiel und Quiz zu öffnen</span></button>`).join('')});
       root.querySelectorAll('.moduleLesson').forEach(btn=>btn.addEventListener('click',()=>renderLesson(btn.dataset.lessonIndex)));
+      refreshCompletedStyles();
       root.querySelector('#openLesson').addEventListener('click',()=>renderLesson(lessonSelect.value));
       root.querySelector('#prevLesson').addEventListener('click',()=>renderLesson(Number(lessonSelect.value)-1));
       root.querySelector('#nextLesson').addEventListener('click',()=>renderLesson(Number(lessonSelect.value)+1));
@@ -695,9 +727,7 @@
 </div>
 <script>
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 }
 </script>
 </body>
