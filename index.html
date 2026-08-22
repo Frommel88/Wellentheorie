@@ -9,10 +9,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   <link rel="apple-touch-icon" href="icon-192.png">
   <title>Elliott Wave Academy</title>
-  <style>
-    html,body{margin:0;padding:0;min-height:100%;background:#0f1115}
-    body{min-width:0}
-  </style>
+  <style>html,body{margin:0;padding:0;min-height:100%;background:#0f1115}body{min-width:0}</style>
 </head>
 <body>
 <div id="ewa" style="min-height:100%;background:light-dark(#f7f8fb,#0f1115);color:light-dark(#16181d,#f4f5f7);font-family:Inter,system-ui,sans-serif;padding:20px;box-sizing:border-box">
@@ -82,6 +79,11 @@
     #ewa .daystep strong{display:block;margin-bottom:5px}
     #ewa .curriculum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
     #ewa .module{border:1px solid light-dark(#e0e4ea,#303640);border-radius:14px;padding:12px}
+    #ewa .moduleLesson{display:block;width:100%;text-align:left;border:0;border-top:1px solid light-dark(#eceef2,#292e36);background:transparent;color:inherit;padding:10px 0;cursor:pointer}
+    #ewa .moduleLesson:first-of-type{border-top:0}
+    #ewa .moduleLesson strong{display:block}
+    #ewa .lessonHero{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:center;margin:12px 0}
+    #ewa .lessonHero svg{width:100%;height:auto;display:block}
     #ewa .review{border-left:4px solid #8b5cf6;padding-left:12px}
     #ewa .reminderRow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-top:12px}
     #ewa .lessonBrowser{margin-top:14px}
@@ -170,30 +172,30 @@
           <h2>Vollständiger Lernpfad · 240 Lektionen</h2>
         <p class="muted">Die Website ist als Langzeitkurs mit 24 Modulen zu je 10 Lektionen aufgebaut. Jede Lektion dauert etwa 5 bis 10 Minuten und verbindet Erklärung, Bild, Quiz und – sobald es um Charttechnik geht – eine praktische Übung. Am Folgetag werden zentrale Aufgaben der vorherigen Lektion automatisch zur Wiederholung eingeplant.</p>
           <div class="curriculum">
-            <div class="module"><strong>1 · Börse verstehen · 10 Lektionen</strong><p class="muted tiny">Aktien, Börsenplätze, Käufer/Verkäufer, Kursbildung, Orderarten, Liquidität und grundlegende Marktmechanik.</p></div>
-            <div class="module"><strong>2 · Charts lesen · 10 Lektionen</strong><p class="muted tiny">Achsen, Linienchart, Balkenchart, Candlesticks, Open/High/Low/Close, Gaps und logarithmische Darstellung.</p></div>
-            <div class="module"><strong>3 · Candlesticks · 10 Lektionen</strong><p class="muted tiny">Körper, Dochte, bullische/bärische Kerzen, Doji, Hammer, Engulfing und Grenzen einzelner Kerzenmuster.</p></div>
-            <div class="module"><strong>4 · Marktstruktur · 10 Lektionen</strong><p class="muted tiny">Trend, Range, Swing High/Low, HH/HL/LH/LL, Strukturbrüche und Kontext.</p></div>
-            <div class="module"><strong>5 · Support & Resistance · 10 Lektionen</strong><p class="muted tiny">Zonen, Rollenwechsel, Mehrfachtests, horizontale Marken, Angebot/Nachfrage und Fehlinterpretationen.</p></div>
-            <div class="module"><strong>6 · Trendlinien & Kanäle · 10 Lektionen</strong><p class="muted tiny">Trendlinien, Parallelkanäle, Ausbrüche, Fehlausbrüche und Einführung Elliott-Channeling.</p></div>
-            <div class="module"><strong>7 · Elliott-Grundidee · 10 Lektionen</strong><p class="muted tiny">R. N. Elliott, 5-3-Zyklus, Motive/Corrective Waves, Fraktalität und Grundnotation.</p></div>
-            <div class="module"><strong>8 · Wellen-Grade · 10 Lektionen</strong><p class="muted tiny">Verschachtelung, Degree-Systeme, Unterwellen und saubere Beschriftung über mehrere Timeframes.</p></div>
-            <div class="module"><strong>9 · Impuls 1–5 · 10 Lektionen</strong><p class="muted tiny">Jede Impulswelle einzeln: typische Struktur, Psychologie, Momentum und häufige Anfängerfehler.</p></div>
-            <div class="module"><strong>10 · Harte Elliott-Regeln · 10 Lektionen</strong><p class="muted tiny">Welle 2, Welle 3, Welle 4, Regelverletzungen, gültige/ungültige Counts und Sonderfälle.</p></div>
-            <div class="module"><strong>11 · Elliott-Guidelines · 10 Lektionen</strong><p class="muted tiny">Alternation, Equality, Extensions, typische Proportionen, Wave Personality und Abgrenzung zu Regeln.</p></div>
-            <div class="module"><strong>12 · Diagonalen & Truncation · 10 Lektionen</strong><p class="muted tiny">Leading/Ending Diagonal, Überlappungen, Keilstruktur, verkürzte fünfte Welle und Fehlzählungen.</p></div>
-            <div class="module"><strong>13 · Zigzags · 10 Lektionen</strong><p class="muted tiny">5-3-5, Single/Double/Triple Zigzag, X-Wellen und Erkennung im Chart.</p></div>
-            <div class="module"><strong>14 · Flats · 10 Lektionen</strong><p class="muted tiny">Regular, Expanded, Running Flat, 3-3-5-Struktur, B- und C-Wellen und Abgrenzung zum Zigzag.</p></div>
-            <div class="module"><strong>15 · Triangles · 10 Lektionen</strong><p class="muted tiny">Contracting, Barrier, Expanding, A-B-C-D-E, Position im größeren Count und typische Fallen.</p></div>
-            <div class="module"><strong>16 · Komplexe Korrekturen · 10 Lektionen</strong><p class="muted tiny">W-X-Y, W-X-Y-X-Z, Double/Triple Three, Kombinationen und strukturierte Fehlerdiagnose.</p></div>
-            <div class="module"><strong>17 · Fibonacci Grundlagen · 10 Lektionen</strong><p class="muted tiny">Fibonacci-Folge, Goldener Schnitt, Prozentrechnung und Herleitung der wichtigsten Verhältnisse.</p></div>
-            <div class="module"><strong>18 · Fibonacci Retracements · 10 Lektionen</strong><p class="muted tiny">23,6/38,2/50/61,8/78,6 %, korrektes Anlegen, sinnvolle Interpretation und Fehlnutzung.</p></div>
-            <div class="module"><strong>19 · Fibonacci Extensions · 10 Lektionen</strong><p class="muted tiny">100/123,6/138,2/161,8/200/261,8 %, Projektionen, Zielzonen, Equality und Cluster.</p></div>
-            <div class="module"><strong>20 · Indikatoren & Momentum · 10 Lektionen</strong><p class="muted tiny">RSI, MACD, Volumen, Divergenzen, SMA/EMA und sinnvolle Bestätigung ohne Indikator-Überladung.</p></div>
-            <div class="module"><strong>21 · Multi-Timeframe-Analyse · 10 Lektionen</strong><p class="muted tiny">Monat bis Intraday, Top-down-Analyse, Degree-Konsistenz und Synchronisation mehrerer Zeitebenen.</p></div>
-            <div class="module"><strong>22 · Primary & Alternate Count · 10 Lektionen</strong><p class="muted tiny">Hauptcount, Alternativcount, Confirmation, Invalidierung, Szenariogewichtung und Unsicherheit.</p></div>
-            <div class="module"><strong>23 · Fundamentalanalyse & Quellen · 10 Lektionen</strong><p class="muted tiny">Umsatz, Gewinn, Cashflow, Schulden, Bewertung, Guidance sowie TradingView, IR, SEC und Register.</p></div>
-            <div class="module"><strong>24 · Praxis & Echtzeit-Training · 10 Lektionen</strong><p class="muted tiny">Historische Charts ohne Zukunftsdaten, komplette Counts, Fehleranalyse, Journal und Abschlussprüfungen.</p></div>
+            <div class="module"><strong>1 · Börse verstehen · 10 Lektionen</strong><p class="muted tiny">Aktien, Börsenplätze, Käufer/Verkäufer, Kursbildung, Orderarten, Liquidität und grundlegende Marktmechanik.</p><div class="moduleLessons" data-module="0"></div></div>
+            <div class="module"><strong>2 · Charts lesen · 10 Lektionen</strong><p class="muted tiny">Achsen, Linienchart, Balkenchart, Candlesticks, Open/High/Low/Close, Gaps und logarithmische Darstellung.</p><div class="moduleLessons" data-module="1"></div></div>
+            <div class="module"><strong>3 · Candlesticks · 10 Lektionen</strong><p class="muted tiny">Körper, Dochte, bullische/bärische Kerzen, Doji, Hammer, Engulfing und Grenzen einzelner Kerzenmuster.</p><div class="moduleLessons" data-module="2"></div></div>
+            <div class="module"><strong>4 · Marktstruktur · 10 Lektionen</strong><p class="muted tiny">Trend, Range, Swing High/Low, HH/HL/LH/LL, Strukturbrüche und Kontext.</p><div class="moduleLessons" data-module="3"></div></div>
+            <div class="module"><strong>5 · Support & Resistance · 10 Lektionen</strong><p class="muted tiny">Zonen, Rollenwechsel, Mehrfachtests, horizontale Marken, Angebot/Nachfrage und Fehlinterpretationen.</p><div class="moduleLessons" data-module="4"></div></div>
+            <div class="module"><strong>6 · Trendlinien & Kanäle · 10 Lektionen</strong><p class="muted tiny">Trendlinien, Parallelkanäle, Ausbrüche, Fehlausbrüche und Einführung Elliott-Channeling.</p><div class="moduleLessons" data-module="5"></div></div>
+            <div class="module"><strong>7 · Elliott-Grundidee · 10 Lektionen</strong><p class="muted tiny">R. N. Elliott, 5-3-Zyklus, Motive/Corrective Waves, Fraktalität und Grundnotation.</p><div class="moduleLessons" data-module="6"></div></div>
+            <div class="module"><strong>8 · Wellen-Grade · 10 Lektionen</strong><p class="muted tiny">Verschachtelung, Degree-Systeme, Unterwellen und saubere Beschriftung über mehrere Timeframes.</p><div class="moduleLessons" data-module="7"></div></div>
+            <div class="module"><strong>9 · Impuls 1–5 · 10 Lektionen</strong><p class="muted tiny">Jede Impulswelle einzeln: typische Struktur, Psychologie, Momentum und häufige Anfängerfehler.</p><div class="moduleLessons" data-module="8"></div></div>
+            <div class="module"><strong>10 · Harte Elliott-Regeln · 10 Lektionen</strong><p class="muted tiny">Welle 2, Welle 3, Welle 4, Regelverletzungen, gültige/ungültige Counts und Sonderfälle.</p><div class="moduleLessons" data-module="9"></div></div>
+            <div class="module"><strong>11 · Elliott-Guidelines · 10 Lektionen</strong><p class="muted tiny">Alternation, Equality, Extensions, typische Proportionen, Wave Personality und Abgrenzung zu Regeln.</p><div class="moduleLessons" data-module="10"></div></div>
+            <div class="module"><strong>12 · Diagonalen & Truncation · 10 Lektionen</strong><p class="muted tiny">Leading/Ending Diagonal, Überlappungen, Keilstruktur, verkürzte fünfte Welle und Fehlzählungen.</p><div class="moduleLessons" data-module="11"></div></div>
+            <div class="module"><strong>13 · Zigzags · 10 Lektionen</strong><p class="muted tiny">5-3-5, Single/Double/Triple Zigzag, X-Wellen und Erkennung im Chart.</p><div class="moduleLessons" data-module="12"></div></div>
+            <div class="module"><strong>14 · Flats · 10 Lektionen</strong><p class="muted tiny">Regular, Expanded, Running Flat, 3-3-5-Struktur, B- und C-Wellen und Abgrenzung zum Zigzag.</p><div class="moduleLessons" data-module="13"></div></div>
+            <div class="module"><strong>15 · Triangles · 10 Lektionen</strong><p class="muted tiny">Contracting, Barrier, Expanding, A-B-C-D-E, Position im größeren Count und typische Fallen.</p><div class="moduleLessons" data-module="14"></div></div>
+            <div class="module"><strong>16 · Komplexe Korrekturen · 10 Lektionen</strong><p class="muted tiny">W-X-Y, W-X-Y-X-Z, Double/Triple Three, Kombinationen und strukturierte Fehlerdiagnose.</p><div class="moduleLessons" data-module="15"></div></div>
+            <div class="module"><strong>17 · Fibonacci Grundlagen · 10 Lektionen</strong><p class="muted tiny">Fibonacci-Folge, Goldener Schnitt, Prozentrechnung und Herleitung der wichtigsten Verhältnisse.</p><div class="moduleLessons" data-module="16"></div></div>
+            <div class="module"><strong>18 · Fibonacci Retracements · 10 Lektionen</strong><p class="muted tiny">23,6/38,2/50/61,8/78,6 %, korrektes Anlegen, sinnvolle Interpretation und Fehlnutzung.</p><div class="moduleLessons" data-module="17"></div></div>
+            <div class="module"><strong>19 · Fibonacci Extensions · 10 Lektionen</strong><p class="muted tiny">100/123,6/138,2/161,8/200/261,8 %, Projektionen, Zielzonen, Equality und Cluster.</p><div class="moduleLessons" data-module="18"></div></div>
+            <div class="module"><strong>20 · Indikatoren & Momentum · 10 Lektionen</strong><p class="muted tiny">RSI, MACD, Volumen, Divergenzen, SMA/EMA und sinnvolle Bestätigung ohne Indikator-Überladung.</p><div class="moduleLessons" data-module="19"></div></div>
+            <div class="module"><strong>21 · Multi-Timeframe-Analyse · 10 Lektionen</strong><p class="muted tiny">Monat bis Intraday, Top-down-Analyse, Degree-Konsistenz und Synchronisation mehrerer Zeitebenen.</p><div class="moduleLessons" data-module="20"></div></div>
+            <div class="module"><strong>22 · Primary & Alternate Count · 10 Lektionen</strong><p class="muted tiny">Hauptcount, Alternativcount, Confirmation, Invalidierung, Szenariogewichtung und Unsicherheit.</p><div class="moduleLessons" data-module="21"></div></div>
+            <div class="module"><strong>23 · Fundamentalanalyse & Quellen · 10 Lektionen</strong><p class="muted tiny">Umsatz, Gewinn, Cashflow, Schulden, Bewertung, Guidance sowie TradingView, IR, SEC und Register.</p><div class="moduleLessons" data-module="22"></div></div>
+            <div class="module"><strong>24 · Praxis & Echtzeit-Training · 10 Lektionen</strong><p class="muted tiny">Historische Charts ohne Zukunftsdaten, komplette Counts, Fehleranalyse, Journal und Abschlussprüfungen.</p><div class="moduleLessons" data-module="23"></div></div>
           </div>
           <div class="banner" style="margin-top:12px"><strong>Gesamtumfang:</strong> 240 Lektionen × 5–10 Minuten = rund 20–40 Stunden neuer Lernstoff. Durch tägliche Wiederholungen, Quiz und Chartübungen liegt die tatsächliche Trainingszeit deutlich höher.</div>
           <div class="lessonBrowser">
@@ -366,7 +368,7 @@
       </section>
     </main>
 
-    <div class="footer">Lern-App-Prototyp · Elliott-Wellen sind ein Analysemodell, keine Garantie für zukünftige Kursbewegungen.</div>
+    <div class="footer">Elliott Wave Academy · 240 Lektionen · Elliott-Wellen sind ein Analysemodell, keine Garantie für zukünftige Kursbewegungen.</div>
   </div>
 
   <script>
@@ -565,7 +567,65 @@
         'Workflow':'Ein sauberer Analyse-Workflow folgt immer derselben Reihenfolge: großer Timeframe, Trend, Swings, möglicher Count, Regeln, Fibonacci, Alternativen, Invalidierung, Bestätigungen, Fundamentaldaten und erst dann Fazit.',
         'Historische Charts':'Historische Charts ohne sichtbare Zukunft verhindern Hindsight Bias. Entscheide zuerst mit den damals verfügbaren Daten und blende erst danach weitere Kerzen ein.'
       };
-      function lookupDetail(title,focus){const key=Object.keys(detailByKeyword).find(k=>title.includes(k));return key?detailByKeyword[key]:`In dieser Lektion lernst du ${title.toLowerCase()}. Der Schwerpunkt liegt darauf, ${focus}. Arbeite immer vom beobachtbaren Preisverhalten zur Interpretation und trenne harte Regeln von häufigen Guidelines.`}
+      const moduleDeepening=[
+        'Du lernst hier nicht nur Begriffe, sondern den tatsächlichen Ablauf eines Börsengeschäfts. Beobachte immer, welche Rolle Käufer, Verkäufer, Orders, Liquidität und Erwartungen spielen. Ziel ist, dass du Preisbewegungen später nicht als zufällige Linien siehst, sondern als Ergebnis von Marktentscheidungen.',
+        'Bei Charts geht es zuerst um Lesen, noch nicht um Vorhersagen. Lerne Achsen, Darstellungsarten, Skalierung und Zeitrahmen so sicher, dass du jeden unbekannten Chart beschreiben kannst, bevor du ihn interpretierst.',
+        'Candlesticks sind verdichtete Preisgeschichten. Entscheidend ist nicht der Name eines Musters, sondern was innerhalb der Periode passiert ist: Wo eröffnete der Markt, wie weit wurde gekauft oder verkauft und wo lag der Schlusskurs?',
+        'Marktstruktur ist das Rückgrat der gesamten späteren Elliott-Analyse. Trainiere, relevante Hochs und Tiefs von unbedeutendem Rauschen zu unterscheiden und aus ihrer Reihenfolge einen Trend oder eine Range abzuleiten.',
+        'Support und Resistance sind Reaktionszonen, keine Mauern. Wichtig ist, wie oft ein Bereich getestet wurde, wie der Markt darauf reagiert und ob ein Bruch akzeptiert oder sofort zurückgenommen wird.',
+        'Trendlinien und Kanäle helfen, Bewegungen räumlich zu ordnen. Verwende nur sinnvolle Ankerpunkte und verschiebe Linien niemals so lange, bis sie zu einer vorgefassten Meinung passen.',
+        'Die Elliott-Theorie beschreibt Marktbewegungen als wiederkehrende, verschachtelte Strukturen. Der wichtigste Lernschritt ist, motive und corrective Bewegungen zu unterscheiden, ohne jede Bewegung zwanghaft in ein Muster zu pressen.',
+        'Degrees verhindern, dass kleine Unterwellen mit großen Hauptwellen vermischt werden. Betrachte immer zuerst den größeren Timeframe und zoome erst dann in die Unterstruktur hinein.',
+        'Beim Impuls geht es um mehr als die Zahlen 1 bis 5. Jede Welle erfüllt eine andere Funktion in der Gesamtbewegung und besitzt typische, aber nicht zwingende Eigenschaften.',
+        'Harte Regeln sind das objektive Kontrollsystem eines Counts. Wird eine Regel verletzt, ist der Count in dieser Form falsch. Genau deshalb sind Regeln wertvoller als subjektive Einschätzungen.',
+        'Guidelines erhöhen die Plausibilität eines Counts, sind aber keine Pflicht. Nutze Alternation, Proportionen, Momentum und Fibonacci als Zusatzinformation, niemals als Ersatz für die harten Regeln.',
+        'Diagonalen und Truncations sind Sonderfälle. Sie dürfen erst dann verwendet werden, wenn ein normaler Impuls nicht passt und die konkrete Sonderstruktur tatsächlich erfüllt ist.',
+        'Zigzags sind häufig relativ scharfe Korrekturen. Entscheidend ist die innere 5-3-5-Struktur und die Frage, ob A und C motive Charakteristika zeigen.',
+        'Flats wirken oft seitwärts und können besonders durch ihre B-Welle täuschen. Ein weit laufendes B ist kein Beweis dafür, dass der vorherige Trend sicher fortgesetzt wird.',
+        'Triangles bestehen aus fünf korrektiven Segmenten und signalisieren häufig eine fortgeschrittene Konsolidierung. Ihre Position im größeren Count ist genauso wichtig wie ihre Form.',
+        'Komplexe Korrekturen sind die schwierigste Zone für Anfänger. Halte den Count so einfach wie möglich und verwende W-X-Y-Strukturen nur, wenn einfache Korrekturformen nicht ausreichen.',
+        'Fibonacci beginnt mit Mathematik, nicht mit Magie. Verstehe zuerst die Zahlenfolge und Verhältnisse, bevor du Prozentlinien auf einen Chart legst.',
+        'Retracements messen Rückläufe. Die praktische Kunst besteht darin, die richtige Referenzbewegung zu wählen und mehrere Level als Zonen zu betrachten, nicht als sichere Umkehrpunkte.',
+        'Extensions projizieren mögliche Zielbereiche. Sie sind besonders nützlich, wenn du bereits eine klare Struktur und einen sauberen Startpunkt der Projektion hast.',
+        'Indikatoren sind Ergänzungen zum Preis. Nutze RSI, MACD, Volumen und gleitende Durchschnitte nur dann, wenn sie eine bereits aus dem Chart abgeleitete These bestätigen oder infrage stellen.',
+        'Multi-Timeframe-Analyse verbindet Kontext und Detail. Der große Timeframe liefert die Landkarte, der kleine Timeframe zeigt die Unterwellen. Beide müssen zueinander passen.',
+        'Ein guter Elliott-Analyst arbeitet mit Szenarien. Primary und Alternate Count helfen, Unsicherheit strukturiert zu behandeln und nicht emotional an einer einzigen Deutung festzuhalten.',
+        'Fundamentalanalyse beantwortet andere Fragen als Chartanalyse. Sie hilft zu verstehen, was das Unternehmen verdient, wie solide es finanziert ist und welche Erwartungen bereits im Preis stecken könnten.',
+        'Im Praxisteil wird alles zusammengeführt. Ziel ist nicht, rückblickend perfekte Counts zu zeichnen, sondern unter Unsicherheit eine nachvollziehbare Analyse mit Regeln, Alternativen und Invalidierung zu erstellen.'
+      ];
+      function lookupDetail(title,focus,moduleIndex,lessonIndex){
+        const key=Object.keys(detailByKeyword).find(k=>title.includes(k));
+        const base=key?detailByKeyword[key]:`In dieser Lektion lernst du ${title.toLowerCase()}. Der Schwerpunkt liegt darauf, ${focus}.`;
+        const deepen=moduleDeepening[moduleIndex]||'';
+        const stage=lessonIndex<3?'Achte zunächst nur auf die Grundidee und die sichtbaren Merkmale.':lessonIndex<7?'Jetzt geht es darum, die Grundidee sicher auf Charts und Beispiele zu übertragen.':'Zum Abschluss dieses Moduls sollst du das Thema ohne Hilfestellung erklären und typische Fehlinterpretationen erkennen können.';
+        return `${base} ${deepen} ${stage}`;
+      }
+      function makeSteps(title,moduleIndex,lessonIndex){
+        const moduleName=fullModules[moduleIndex].name;
+        const base=[
+          `1. Beschreibe zuerst objektiv, was du bei „${title}“ siehst oder misst.`,
+          `2. Ordne die Beobachtung in den Baustein „${moduleName}“ ein.`,
+          '3. Prüfe, welche Aussage zwingend ist und welche nur typisch oder wahrscheinlich ist.',
+          '4. Suche mindestens ein Gegenargument oder eine alternative Erklärung.',
+          '5. Formuliere am Ende in einem Satz, was du aus der Beobachtung ableiten darfst – und was nicht.'
+        ];
+        if(moduleIndex===9) base[2]='3. Prüfe die harte Elliott-Regel. Eine Regelverletzung beendet diesen konkreten Count.';
+        if(moduleIndex===16||moduleIndex===17||moduleIndex===18) base[2]='3. Berechne oder markiere das Verhältnis sauber und behandle das Ergebnis als Zone, nicht als Garantie.';
+        if(moduleIndex===20) base[1]='2. Beginne im größeren Timeframe und zoome erst danach in den kleineren hinein.';
+        if(moduleIndex===21) base[3]='4. Formuliere immer mindestens einen Alternate Count und sein Invalidationsniveau.';
+        if(moduleIndex===23) base[4]='5. Dokumentiere deine Entscheidung, bevor du weitere Kursdaten einblendest.';
+        return base;
+      }
+      function makePractice(title,moduleIndex){
+        if(moduleIndex<=5) return `Praxis: Öffne einen beliebigen liquiden Aktienchart. Suche ein konkretes Beispiel für „${title}“ und notiere in zwei Sätzen nur das, was du objektiv siehst. Vermeide zunächst jede Prognose.`;
+        if(moduleIndex>=6&&moduleIndex<=15) return `Praxis: Zeichne eine kleine schematische Kursbewegung zu „${title}“. Beschrifte Haupt- und Unterwellen und schreibe daneben, welche Regel oder Strukturbedingung erfüllt sein muss.`;
+        if(moduleIndex>=16&&moduleIndex<=18) return `Praxis: Nimm eine Bewegung von 100 auf 160 Punkten. Berechne die für „${title}“ relevanten Prozent- oder Projektionswerte selbst und vergleiche sie anschließend mit einer Chartmessung.`;
+        if(moduleIndex===19) return `Praxis: Öffne einen Chart mit RSI oder MACD und suche eine Stelle, an der „${title}“ die Preisstruktur bestätigt oder ihr widerspricht. Formuliere ausdrücklich, warum der Indikator allein nicht genügt.`;
+        if(moduleIndex===20) return `Praxis: Öffne dasselbe Asset im Wochen-, Tages- und 4-Stunden-Chart. Notiere für „${title}“ auf jeder Ebene Trend, wichtigste Swings und möglichen Degree.`;
+        if(moduleIndex===21) return `Praxis: Erstelle zu „${title}“ einen Primary und einen Alternate Count. Lege für beide ein klares Invalidationsniveau fest.`;
+        if(moduleIndex===22) return `Praxis: Wähle ein reales Unternehmen und suche die zu „${title}“ passende Kennzahl zuerst in einer Primärquelle. Notiere Quelle, Zeitraum und warum die Kennzahl allein noch keine Kaufentscheidung erlaubt.`;
+        return `Praxis: Simuliere eine echte Analyse zu „${title}“, treffe deine Entscheidung mit verdeckter Zukunft und überprüfe erst danach die nachfolgenden Kerzen.`;
+      }
       function makeExample(title,moduleIndex,lessonIndex){
         if(title.includes('Welle 2')) return 'Beispiel: Welle 1 läuft von 100 € auf 120 €. Eine mögliche Welle 2 darf 100 € nicht unterschreiten. Fällt der Kurs auf 99 €, ist genau dieser Impulscount invalidiert.';
         if(title.includes('Welle 3')) return 'Beispiel: Welle 1 misst 20 Punkte, Welle 3 misst 32 Punkte und Welle 5 misst 24 Punkte. Welle 3 ist nicht die kürzeste und kann daher regelkonform sein.';
@@ -577,7 +637,7 @@
         if(title.includes('Triangle')) return 'Beispiel: Der Kurs bildet fünf überlappende Segmente A-B-C-D-E, während Hochs und Tiefs zunehmend zusammenrücken. Danach folgt häufig noch ein letzter Schub der größeren Struktur.';
         if(title.includes('RSI')) return 'Beispiel: Der Kurs erreicht ein neues Hoch, der RSI bleibt jedoch unter seinem vorherigen Hoch. Das kann eine bearishe Divergenz sein, aber noch kein automatisches Verkaufssignal.';
         if(title.includes('KGV')) return 'Beispiel: Zwei Unternehmen haben KGV 10 und KGV 30. Ohne Wachstum, Verschuldung, Qualität und Zyklik zu kennen, lässt sich daraus allein keine Kaufentscheidung ableiten.';
-        return `Beispiel: Öffne einen sauberen Chart, markiere nur die für „${title}“ relevanten Punkte und erkläre zuerst, was objektiv sichtbar ist. Erst danach ordnest du die Beobachtung in ${fullModules[moduleIndex].name} ein.`;
+        return `Beispiel: Öffne einen sauberen Chart, markiere nur die für „${title}“ relevanten Punkte und erkläre zuerst, was objektiv sichtbar ist. Erst danach ordnest du die Beobachtung in ${fullModules[moduleIndex].name} ein. Wenn zwei Deutungen möglich sind, notiere beide statt eine davon zu erzwingen.`;
       }
       function makeWarning(title){
         if(title.includes('Regel')) return 'Typischer Fehler: Eine Guideline wie ein häufiges Fibonacci-Verhältnis als zwingende Elliott-Regel behandeln.';
@@ -594,12 +654,23 @@
         if(title.includes('Invalidierung')) return ['Warum braucht jeder Elliott-Count ein Invalidationsniveau?','Damit objektiv feststeht, wann dieser konkrete Count nicht mehr gültig sein kann.'];
         return [`Was ist die wichtigste Aussage der Lektion „${title}“?`,`Du sollst ${title.toLowerCase()} korrekt erklären, im passenden Kontext erkennen und dabei Regeln, Guidelines und Wahrscheinlichkeiten sauber trennen.`];
       }
-      function buildFullLessons(){const out=[];let id=1;fullModules.forEach((m,mi)=>m.titles.forEach((title,li)=>{const qa=makeQuiz(title,m.topic);out.push({title:`${id} · ${title}`,topic:m.topic,text:lookupDetail(title,m.focus),example:makeExample(title,mi,li),remember:`Merksatz: ${title} gehört zum Baustein „${m.name}“. Erst verstehen, dann im Chart erkennen, danach mit anderen Hinweisen verbinden.`,warning:makeWarning(title),quiz:qa[0],answer:qa[1]});id++}));return out}
+      function buildFullLessons(){const out=[];let id=1;fullModules.forEach((m,mi)=>m.titles.forEach((title,li)=>{const qa=makeQuiz(title,m.topic);out.push({title:`${id} · ${title}`,topic:m.topic,text:lookupDetail(title,m.focus,mi,li),steps:makeSteps(title,mi,li),example:makeExample(title,mi,li),practice:makePractice(title,mi),remember:`Merksatz: ${title} gehört zum Baustein „${m.name}“. Erst verstehen, dann im Chart erkennen, danach mit anderen Hinweisen verbinden.`,warning:makeWarning(title),quiz:qa[0],answer:qa[1]});id++}));return out}
       lessonData.splice(0,lessonData.length,...buildFullLessons());
       const lessonSelect=root.querySelector('#lessonSelect');
       const lessonContent=root.querySelector('#lessonContent');
       lessonData.forEach((l,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=l.title;lessonSelect.appendChild(o)});
-      function renderLesson(index){const i=Math.max(0,Math.min(lessonData.length-1,Number(index)||0));lessonSelect.value=String(i);const l=lessonData[i];lessonContent.innerHTML=`<span class="pill">${l.topic}</span><h2 style="margin-top:10px">${l.title}</h2><p>${l.text}</p><div class="example"><strong>Beispiel</strong><br>${l.example}</div><div class="remember"><strong>Merksatz</strong><br>${l.remember}</div><div class="warning"><strong>Typischer Fehler</strong><br>${l.warning}</div><h3>Mini-Quiz</h3><p><strong>${l.quiz}</strong></p><button class="btn secondary lessonAnswer">Antwort anzeigen</button><div class="lessonAnswerText banner hidden" style="margin-top:10px"><strong>Antwort:</strong> ${l.answer}</div>`;const b=lessonContent.querySelector('.lessonAnswer');const a=lessonContent.querySelector('.lessonAnswerText');b.addEventListener('click',()=>a.classList.remove('hidden'))}
+      function lessonVisual(l){
+        const t=l.topic;
+        if(t==='Candlesticks') return '<svg viewBox="0 0 320 180"><line x1="110" y1="25" x2="110" y2="155" stroke="#42a36a" stroke-width="4"/><rect x="82" y="62" width="56" height="62" fill="#42a36a"/><line x1="225" y1="30" x2="225" y2="152" stroke="#cf5d5d" stroke-width="4"/><rect x="197" y="70" width="56" height="52" fill="#cf5d5d"/></svg>';
+        if(t==='Elliott'||t==='Impuls'||t==='Korrekturen') return '<svg viewBox="0 0 320 180"><polyline points="18,150 72,105 105,130 178,48 220,86 292,28" fill="none" stroke="#6c7af7" stroke-width="6"/><g fill="currentColor" font-size="14"><text x="66" y="96">1</text><text x="101" y="148">2</text><text x="172" y="39">3</text><text x="216" y="104">4</text><text x="286" y="22">5</text></g></svg>';
+        if(t==='Fibonacci') return '<svg viewBox="0 0 320 180"><polyline points="20,150 150,34 295,94" fill="none" stroke="#8b5cf6" stroke-width="6"/><g stroke="currentColor" opacity=".28" stroke-dasharray="4 4"><line x1="40" y1="63" x2="300" y2="63"/><line x1="40" y1="82" x2="300" y2="82"/><line x1="40" y1="100" x2="300" y2="100"/><line x1="40" y1="118" x2="300" y2="118"/></g></svg>';
+        if(t==='Marktstruktur'||t==='Technische Analyse') return '<svg viewBox="0 0 320 180"><polyline points="20,145 78,88 118,118 184,58 228,88 298,30" fill="none" stroke="#42a36a" stroke-width="6"/></svg>';
+        if(t==='Fundamentalanalyse') return '<svg viewBox="0 0 320 180"><g fill="#6c7af7"><rect x="45" y="105" width="45" height="50"/><rect x="125" y="75" width="45" height="80"/><rect x="205" y="45" width="45" height="110"/></g></svg>';
+        return '<svg viewBox="0 0 320 180"><path d="M25 150 H300 M35 160 V25" stroke="currentColor" opacity=".18"/><polyline points="40,140 90,118 130,130 180,75 225,95 292,45" fill="none" stroke="#6c7af7" stroke-width="6"/></svg>';
+      }
+      function renderLesson(index){const i=Math.max(0,Math.min(lessonData.length-1,Number(index)||0));lessonSelect.value=String(i);const l=lessonData[i];lessonContent.innerHTML=`<span class="pill">${l.topic}</span><h2 style="margin-top:10px">${l.title}</h2><div class="lessonHero"><div><h3>Erklärung</h3><p>${l.text}</p><div class="example"><strong>Konkretes Beispiel</strong><br>${l.example}</div></div><div class="visual">${lessonVisual(l)}</div></div><h3>Schritt für Schritt</h3><ul>${l.steps.map(s=>`<li>${s}</li>`).join('')}</ul><div class="example"><strong>Eigene Übung</strong><br>${l.practice}</div><div class="remember"><strong>Merksatz</strong><br>${l.remember}</div><div class="warning"><strong>Typischer Fehler</strong><br>${l.warning}</div><h3>Selbstkontrolle</h3><p class="muted">Bevor du die Antwort öffnest, erkläre das Thema laut in eigenen Worten. Wenn du stockst, lies Erklärung und Beispiel noch einmal.</p><h3>Mini-Quiz</h3><p><strong>${l.quiz}</strong></p><button class="btn secondary lessonAnswer">Antwort anzeigen</button><div class="lessonAnswerText banner hidden" style="margin-top:10px"><strong>Antwort:</strong> ${l.answer}</div>`;lessonContent.scrollIntoView({behavior:'smooth',block:'start'});const b=lessonContent.querySelector('.lessonAnswer');const a=lessonContent.querySelector('.lessonAnswerText');b.addEventListener('click',()=>a.classList.remove('hidden'))}
+      root.querySelectorAll('.moduleLessons').forEach(box=>{const moduleIndex=Number(box.dataset.module);const start=moduleIndex*10;const slice=lessonData.slice(start,start+10);box.innerHTML=slice.map((l,offset)=>`<button class="moduleLesson" data-lesson-index="${start+offset}"><strong>${l.title}</strong><span class="muted tiny">Antippen, um Lerninhalt, Bild, Beispiel und Quiz zu öffnen</span></button>`).join('')});
+      root.querySelectorAll('.moduleLesson').forEach(btn=>btn.addEventListener('click',()=>renderLesson(btn.dataset.lessonIndex)));
       root.querySelector('#openLesson').addEventListener('click',()=>renderLesson(lessonSelect.value));
       root.querySelector('#prevLesson').addEventListener('click',()=>renderLesson(Number(lessonSelect.value)-1));
       root.querySelector('#nextLesson').addEventListener('click',()=>renderLesson(Number(lessonSelect.value)+1));
