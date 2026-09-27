@@ -1,29 +1,18 @@
-ELLIOTT WAVE ACADEMY – AKTUELLE GITHUB/PWA-VERSION
+FITQUEST V0.2
+=============
 
-Enthalten:
-- aktuelle mobile Lektionsdarstellung
-- Bilder oberhalb der Texte
-- Quiz am Ende jeder Lektion
-- 'Lektion abschließen' erst nach richtig beantwortetem Quiz
-- grüne Markierung abgeschlossener Lektionen
-- Button zurück zur Lektionsübersicht
-- Übungen und Wellentrainer
-- lokaler Fortschritt über localStorage
-- PWA-Manifest, Service Worker und Icons
+Neu:
+- Daily Quests werden jeden Kalendertag automatisch zurueckgesetzt.
+- Wenn die App ueber Mitternacht offen bleibt, erfolgt der Reset automatisch.
+- Daily Training: maximal 8 Uebungen, kompakt auf einen Blick.
+- 4 Wechselbloecke mit unterschiedlichen Muskelgruppen fuer kompakte Einheiten.
+- 3 rotierende Ganzkoerperplaene A/B/C auf Basis des Uebungskatalogs.
+- Individuelles Training: bis zu 8 Uebungen frei waehlen.
+- Individuelle Auswahl kann nach Muskelgruppen automatisch abwechselnd sortiert werden.
+- Uebungskatalog nach Muskelgruppen einklappbar.
+- Eingetragene Uebungen werden im aktuellen Workout gruen abgehakt.
+- Bestehende lokale Daten aus V0.1 werden weiterverwendet.
+- Service Worker Cache auf V0.2 aktualisiert.
 
-UPLOAD AUF GITHUB:
-1. ZIP entpacken.
-2. Im Repository 'Elliott-Wellentheorie' diese Dateien hochladen/ersetzen:
-   index.html
-   manifest.webmanifest
-   sw.js
-   icon-192.png
-   icon-512.png
-3. Commit changes.
-4. 1–3 Minuten warten.
-5. Öffnen:
-   https://frommel88.github.io/Elliott-Wellentheorie/
-
-AUF SAMSUNG:
-Falls eine alte Version installiert ist, diese entfernen.
-Chrome schließen, Website neu öffnen und 'App installieren' wählen.
+GitHub Pages Update:
+Alle 8 Dateien liegen weiterhin direkt im Hauptverzeichnis. Beim Upload auf GitHub die bestehenden Dateien ersetzen.
